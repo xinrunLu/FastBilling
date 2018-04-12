@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 注册界面 -->
+<?xml version="1.0" encoding="utf-8"?><!-- 注册界面 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#6495ED"
     android:orientation="vertical">
 
@@ -18,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            >
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -29,6 +27,7 @@
 
 
             <Button
+                android:id="@+id/btn_regeister_exit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -44,7 +43,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -52,7 +51,7 @@
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:paddingLeft="50dip"
-            android:paddingRight="50dip" >
+            android:paddingRight="50dip">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,22 +66,31 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/re_username"
-                    android:layout_width="fill_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_vertical"
-                    android:background="@null"
-                    android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:hint="username"
-                    android:maxLength="16"
-                    android:singleLine="true"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:textSize="14sp" />
+                    android:textColorHint="#FFFFFF">
+
+                    <EditText
+                        android:id="@+id/edit_regesiter_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:hint="Username"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="16"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
 
                 <ImageView
                     android:id="@+id/flag_same_name"
@@ -103,20 +111,29 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dip" >
+                android:layout_marginTop="30dip">
 
-                <EditText
-                    android:id="@+id/re_email"
-                    android:layout_width="fill_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@null"
-                    android:hint="email"
-                    android:maxLength="30"
-                    android:singleLine="true"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:textSize="14sp" />
+                    android:textColorHint="#FFFFFF">
+
+                    <EditText
+                        android:id="@+id/edit_regeister_email"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:hint="Email"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="30"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
 
                 <ImageView
                     android:id="@+id/flag_email"
@@ -136,23 +153,30 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dip" >
+                android:layout_marginTop="30dip">
 
-                <EditText
-                    android:id="@+id/re_password"
-                    android:layout_width="fill_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_vertical"
-                    android:background="@null"
-                    android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:hint="password"
-                    android:maxLength="18"
-                    android:password="true"
-                    android:singleLine="true"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:textSize="14sp" />
+                    android:textColorHint="#FFFFFF">
+
+                    <EditText
+                        android:id="@+id/edit_regeister_password"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:hint="Password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:maxLength="18"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </android.support.design.widget.TextInputLayout>
+
             </RelativeLayout>
 
             <View
@@ -162,7 +186,7 @@
                 android:background="#FFFFFF" />
 
             <Button
-                android:id="@+id/regesiter_finish_btn"
+                android:id="@+id/btn_finish_regeister"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

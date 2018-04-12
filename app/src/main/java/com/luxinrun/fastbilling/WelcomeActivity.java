@@ -14,7 +14,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome);
+        setContentView(R.layout.activity_welcome);
         Bmob.initialize(this, "bf4b72ed939aa8a668b48e30cfacd4a2");
 
         Timer timer = new Timer();

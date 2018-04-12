@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6495ED"
-    android:fitsSystemWindows="true"
-
-    >
+    android:fitsSystemWindows="true">
 
 
     <android.support.design.widget.AppBarLayout
@@ -21,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            >
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageView
                 android:layout_width="wrap_content"

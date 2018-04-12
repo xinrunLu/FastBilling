@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_exp_title:
                 tv_exp_title.setTextColor(getResources().getColor(R.color.colorPrimary));
                 tv_exp_title.setBackgroundResource(R.drawable.tv_exp_bg_selected);

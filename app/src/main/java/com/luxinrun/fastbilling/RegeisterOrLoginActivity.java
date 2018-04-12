@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class RegeisterOrLoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegeisterOrLoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_visitor;
     private Button btn_regeister;
@@ -35,18 +35,18 @@ public class RegeisterOrLoginActivity extends AppCompatActivity implements View.
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_visitor:
-                intent.setClass(RegeisterOrLoginActivity.this,MainActivity.class);
+                intent.setClass(RegeisterOrLoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 RegeisterOrLoginActivity.this.finish();
                 break;
             case R.id.btn_regeister:
-                intent.setClass(RegeisterOrLoginActivity.this,RegeisterActivity.class);
+                intent.setClass(RegeisterOrLoginActivity.this, RegeisterActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:
-                intent.setClass(RegeisterOrLoginActivity.this,LoginActivity.class);
+                intent.setClass(RegeisterOrLoginActivity.this, LoginActivity.class);
                 startActivity(intent);
                 break;
 

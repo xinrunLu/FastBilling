@@ -42,35 +42,39 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class RegeisterActivity extends AppCompatActivity{
+public class RegeisterActivity extends AppCompatActivity {
 
-
+    private EditText edit_regeister_username;
+    private EditText edit_regeister_email;
+    private EditText edit_regeister_password;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regeister);
-        // Set up the login form.
+
+        edit_regeister_username = (EditText) findViewById(R.id.edit_regesiter_username);
+        edit_regeister_email = (EditText) findViewById(R.id.edit_regeister_email);
+        edit_regeister_password = (EditText) findViewById(R.id.edit_regeister_password);
 
 
-        BmobUser bu = new BmobUser();
-        bu.setUsername("lxrhww");
-        bu.setPassword("123456");
-        bu.setEmail("sendi@163.com");
-        bu.signUp(new SaveListener<MyUser>() {
-            @Override
-            public void done(MyUser myUser, BmobException e) {
-                if (e == null){
-                    Log.d("lxr","success");
-                }else {
-                    Log.d("lxr","fail");
-                }
-            }
-        });
+//        BmobUser bu = new BmobUser();
+//        bu.setUsername("lxrhww");
+//        bu.setPassword("123456");
+//        bu.setEmail("sendi@163.com");
+//        bu.signUp(new SaveListener<MyUser>() {
+//            @Override
+//            public void done(MyUser myUser, BmobException e) {
+//                if (e == null){
+//                    Log.d("lxr","success");
+//                }else {
+//                    Log.d("lxr","fail");
+//                }
+//            }
+//        });
 
     }
-
 
 
 }
