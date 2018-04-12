@@ -1,5 +1,6 @@
 package com.luxinrun.fastbilling;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,9 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.*;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+    private TextView tv_income_title;
+    private TextView tv_exp_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        tv_income_title = (TextView) findViewById(R.id.tv_income_title);
+        tv_income_title.setOnClickListener(this);
+        tv_exp_title = (TextView) findViewById(R.id.tv_exp_title);
+        tv_exp_title.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +62,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,5 +109,24 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_exp_title:
+                tv_exp_title.setTextColor(getResources().getColor(R.color.colorPrimary));
+                tv_exp_title.setBackgroundResource(R.drawable.tv_exp_bg_selected);
+                tv_income_title.setTextColor(getResources().getColor(R.color.colorWhite));
+                tv_income_title.setBackgroundResource(R.drawable.tv_income_bg_nor);
+                break;
+
+            case R.id.tv_income_title:
+                tv_exp_title.setTextColor(getResources().getColor(R.color.colorWhite));
+                tv_exp_title.setBackgroundResource(R.drawable.tv_exp_bg_nor);
+                tv_income_title.setTextColor(getResources().getColor(R.color.colorPrimary));
+                tv_income_title.setBackgroundResource(R.drawable.tv_income_bg_selected);
+                break;
+        }
     }
 }
