@@ -1,20 +1,26 @@
 <resources>
-    <string name="app_name">FastBilling</string>
+    <string name="app_name">极简记账</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
 
+    <!-- 有关注册登录的Strings -->
+    <string name="exit_app">退出</string>
     <string name="login_visitor">游客</string>
     <string name="login_cn">登陆</string>
     <string name="regeister_cn">注册</string>
-
-    <string name="tv_exp">支出</string>
-    <string name="tv_income">收入</string>
+    <string name="edit_hint_uesername">用户名</string>
+    <string name="edit_hint_email">邮箱</string>
+    <string name="edit_hint_password">密码</string>
+    <string name="creat_my_account">创建我的账号</string>
     <string name="welcome_join_us">欢迎加入</string>
     <string name="welcome_content_cn">欢迎使用 极简记账</string>
     <string name="welcome_content_ad_cn2">体验极速记账的魅力</string>
+
+    <string name="tv_exp">支出</string>
+    <string name="tv_income">收入</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

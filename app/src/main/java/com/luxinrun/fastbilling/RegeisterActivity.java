@@ -74,6 +74,8 @@ public class RegeisterActivity extends AppCompatActivity implements View.OnClick
         btn_finish_regeister.setOnClickListener(this);
 
 
+
+
     }
 
     /**
