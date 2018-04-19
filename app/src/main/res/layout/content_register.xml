@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_regester"
+            android:id="@+id/toolbar_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
@@ -23,19 +23,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:layout_gravity="center"
                 android:src="@drawable/app_icon_welcome" />
 
 
-            <Button
-                android:id="@+id/btn_regeister_exit"
+            <ImageButton
+                android:background="@drawable/btn_back_selector"
+                android:id="@+id/ivBtn_register_exit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_margin="16dp"
-                android:background="@null"
-                android:text="@string/exit_app"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                />
         </android.support.v7.widget.Toolbar>
 
 
@@ -75,13 +72,13 @@
 
                     <EditText
 
-                        android:id="@+id/edit_regesiter_username"
+                        android:id="@+id/edit_register_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:hint="@string/edit_hint_uesername"
+                        android:hint="@string/edit_hint_username"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:maxLength="16"
@@ -120,7 +117,7 @@
                     android:textColorHint="#FFFFFF">
 
                     <EditText
-                        android:id="@+id/edit_regeister_email"
+                        android:id="@+id/edit_register_email"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -162,7 +159,7 @@
                     android:textColorHint="#FFFFFF">
 
                     <EditText
-                        android:id="@+id/edit_regeister_password"
+                        android:id="@+id/edit_register_password"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -187,13 +184,13 @@
                 android:background="#FFFFFF" />
 
             <Button
-                android:id="@+id/btn_finish_regeister"
+                android:id="@+id/btn_finish_register"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dip"
                 android:background="@drawable/btn_login_selector"
-                android:text="@string/creat_my_account"
+                android:text="@string/create_my_account"
                 android:textColor="#6495ED"
                 android:textSize="14sp"
                 android:textStyle="bold" />

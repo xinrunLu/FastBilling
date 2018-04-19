@@ -17,14 +17,22 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         Bmob.initialize(this, "bf4b72ed939aa8a668b48e30cfacd4a2");
 
+        final String login_state = SharedPreferencesData.get_login_state(this);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 Intent intent = new Intent();
-                intent.setClass(WelcomeActivity.this, RegeisterOrLoginActivity.class);
+                if (login_state.equals(Constant.STATE_FIRST)) {
+                    intent.setClass(WelcomeActivity.this, RegisterOrLoginActivity.class);
+
+                } else {
+                    intent.setClass(WelcomeActivity.this, FragmentMain.class);
+
+                }
                 startActivity(intent);
                 WelcomeActivity.this.finish();
+
             }
         };
         timer.schedule(task, 3000);

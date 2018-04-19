@@ -2,6 +2,33 @@
 <resources>
     <color name="colorPrimary">#6495ED</color>
     <color name="colorPrimaryDark">#6495ED</color>
+    <color name="personal_tv_color">#666666</color>  <!--个人中心菜单textview的颜色-->
+    <color name="personal_img_icon">#515151</color>  <!--个人中心菜单icon图标的颜色-->
+    <color name="personal_head_portrait_color">#3CB371</color><!--个人中心菜单头像的背景颜色-->
+    <color name="personal_no_color">#66000000</color><!--个人中心菜单半透明颜色-->
+    <color name="personal_diver">#e6e6e6</color><!--个人中心分割线颜色-->
+    <color name="personal_layout_pressed_color">#dbdbdb</color><!--个人中心点击后的颜色-->
+
+    <color name="keyboard_btn_nor">#4682B4</color> <!-- 数字键盘的背景色 钢兰色 -->
+
+    <color name="no_1">#FFB6C1</color><!--亮粉红色-->
+    <color name="no_2">#FFA500</color> <!--橙色-->
+    <color name="no_3">#FA8072</color> <!--鲜肉色-->
+    <color name="no_4">#EE82EE</color> <!--紫罗兰色 -->
+    <color name="no_5">#DEB887</color> <!--实木色-->
+    <color name="no_6">#DAA520</color> <!--金麒麟色-->
+    <color name="no_7">#D2B48C</color> <!--茶色 -->
+    <color name="no_8">#CD5C5C</color> <!--印第安红 -->
+    <color name="no_9">#B22222</color> <!--火砖色 -->
+    <color name="no_10">#ADD8E6</color> <!--亮蓝色 -->
+    <color name="no_11">#7B68EE</color> <!--中暗蓝色 -->
+    <color name="no_12">#708090</color> <!--灰石色-->
+    <color name="no_13">#3CB371</color> <!--中海蓝 -->
+    <color name="no_14">#2F4F4F</color> <!--暗瓦灰色 -->
+    <color name="no_15">#1E90FF</color> <!--闪兰色 -->
+
+
+
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color> <!--白色 -->
     <color name="ivory">#FFFFF0</color> <!--象牙色 -->

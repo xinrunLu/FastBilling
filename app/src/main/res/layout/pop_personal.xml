@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+        <!-- 头像部分 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/personal_head_portrait_color"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <ImageView
+                android:id="@+id/img_head_portrait"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/personal_head_portrait_initial" />
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img_head_portrait"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <!-- 备份部分 -->
+                <RelativeLayout
+                    android:id="@+id/layout_backup"
+                    style="@style/pop_personal_layout">
+
+                    <ImageView
+                        android:id="@+id/img_personal_backup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/personal_backup" />
+
+                    <TextView
+                        style="@style/pop_personal_tv"
+                        android:layout_toRightOf="@+id/img_personal_backup"
+                        android:text="@string/personal_backup_cn" />
+
+                </RelativeLayout>
+                <!-- 分享部分 -->
+                <RelativeLayout
+                    android:id="@+id/layout_share"
+                    style="@style/pop_personal_layout">
+
+                    <ImageView
+                        android:id="@+id/img_personal_share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/personal_share" />
+
+                    <TextView
+                        style="@style/pop_personal_tv"
+                        android:layout_toRightOf="@+id/img_personal_share"
+                        android:text="@string/personal_share_cn" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/personal_diver" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <!-- 关于部分 -->
+                <RelativeLayout
+                    android:id="@+id/layout_about"
+                    style="@style/pop_personal_layout">
+
+                    <ImageView
+                        android:id="@+id/img_personal_about"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/personal_about" />
+
+                    <TextView
+                        style="@style/pop_personal_tv"
+                        android:layout_toRightOf="@+id/img_personal_about"
+                        android:text="@string/personal_about_cn" />
+
+                </RelativeLayout>
+
+                <!-- 反馈部分 -->
+                <RelativeLayout
+                    android:id="@+id/layout_feedback"
+                    style="@style/pop_personal_layout">
+
+                    <ImageView
+                        android:id="@+id/img_personal_feedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/personal_feedback" />
+
+                    <TextView
+                        style="@style/pop_personal_tv"
+                        android:layout_toRightOf="@+id/img_personal_feedback"
+                        android:text="@string/personal_feedback_cn" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <!--设置半透明部分用于点击退出pop-->
+    <LinearLayout
+        android:id="@+id/pop_personal_outside"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.8"
+        android:background="@color/personal_no_color">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

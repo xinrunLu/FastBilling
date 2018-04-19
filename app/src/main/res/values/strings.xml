@@ -10,11 +10,17 @@
     <string name="exit_app">退出</string>
     <string name="login_visitor">游客</string>
     <string name="login_cn">登陆</string>
-    <string name="regeister_cn">注册</string>
-    <string name="edit_hint_uesername">用户名</string>
+    <string name="success_login_cn">登陆成功</string>
+    <string name="failed_login_cn">登陆失败</string>
+    <string name="register_cn">注册</string>
+    <string name="edit_hint_username">用户名</string>
     <string name="edit_hint_email">邮箱</string>
     <string name="edit_hint_password">密码</string>
-    <string name="creat_my_account">创建我的账号</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="have_no_account">还没有账号？赶紧注册一个！</string>
+    <string name="create_my_account">创建我的账号</string>
+    <string name="success_register">账号注册成功</string>
+    <string name="failed_register">账号注册失败，请检查网络或者输入是否正确</string>
     <string name="welcome_join_us">欢迎加入</string>
     <string name="welcome_content_cn">欢迎使用 极简记账</string>
     <string name="welcome_content_ad_cn2">体验极速记账的魅力</string>
@@ -22,6 +28,29 @@
     <string name="tv_exp">支出</string>
     <string name="tv_income">收入</string>
     <string name="title_activity_login">Sign in</string>
+
+
+    <!--个人中心的String-->
+    <string name="personal_backup_cn">备份</string>
+    <string name="personal_share_cn">分享</string>
+    <string name="personal_about_cn">关于</string>
+    <string name="personal_feedback_cn">反馈</string>
+
+    <!--键盘的String-->
+    <string name="keyboard_1">1</string>
+    <string name="keyboard_2">2</string>
+    <string name="keyboard_3">3</string>
+    <string name="keyboard_4">4</string>
+    <string name="keyboard_5">5</string>
+    <string name="keyboard_6">6</string>
+    <string name="keyboard_7">7</string>
+    <string name="keyboard_8">8</string>
+    <string name="keyboard_9">9</string>
+    <string name="keyboard_0">0</string>
+    <string name="keyboard_comma">.</string>
+    <string name="keyboard_del">←</string>
+    <string name="keyboard_done">√</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -32,7 +61,7 @@
     <string name="error_invalid_email">输入的邮箱格式不正确</string>
     <string name="error_invalid_password">输入的密码长度不正确</string>
     <string name="error_incorrect_password">输入的密码不正确</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_field_required">这里是必输项</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

@@ -19,4 +19,33 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+    <style name="pop_personal_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">35dp</item>
+        <item name="android:textColor">@color/personal_tv_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="pop_personal_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/personal_layout_selector</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <!-- 数字键盘btn样式 -->
+    <style name="keyboard_num_btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/keyboard_bg_selector</item>
+    </style>
+
 </resources>
