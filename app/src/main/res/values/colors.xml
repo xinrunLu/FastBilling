@@ -8,7 +8,8 @@
     <color name="personal_no_color">#66000000</color><!--个人中心菜单半透明颜色-->
     <color name="personal_diver">#e6e6e6</color><!--个人中心分割线颜色-->
     <color name="personal_layout_pressed_color">#dbdbdb</color><!--个人中心点击后的颜色-->
-
+    <color name="add_finish_nor">#32CD32</color> <!-- 完成按钮未点击 -->
+    <color name="add_finish_pressed">#008000</color> <!--完成按点击 -->
     <color name="keyboard_btn_nor">#4682B4</color> <!-- 数字键盘的背景色 钢兰色 -->
 
     <color name="no_1">#FFB6C1</color><!--亮粉红色-->

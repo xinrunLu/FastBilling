@@ -2,7 +2,7 @@
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             
 			<solid
-			android:color="@color/keyboard_btn_nor"/><!-- 填充色 -->
+			android:color="@color/colorWhite"/><!-- 填充色 -->
             <!-- 圆角 -->
             <corners
                 android:radius="0dp" />

@@ -46,7 +46,9 @@
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FragmentMain" />
+        <activity
+            android:name=".FragmentMain"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
     </application>
 
 </manifest>

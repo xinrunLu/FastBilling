@@ -2,7 +2,7 @@
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             
 			<solid
-			android:color="@color/colorPrimary"/><!-- 填充色 -->
+			android:color="@color/personal_layout_pressed_color"/><!-- 填充色 -->
             <!-- 圆角 -->
             <corners
                 android:radius="0dp" />

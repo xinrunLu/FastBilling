@@ -36,6 +36,11 @@
     <string name="personal_about_cn">关于</string>
     <string name="personal_feedback_cn">反馈</string>
 
+    <!--FragmentAdd的String-->
+    <string name="title_money">账单金额</string>
+    <string name="initial_money">0.00</string>
+
+
     <!--键盘的String-->
     <string name="keyboard_1">1</string>
     <string name="keyboard_2">2</string>

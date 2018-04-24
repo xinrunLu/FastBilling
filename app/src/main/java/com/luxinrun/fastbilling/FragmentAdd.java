@@ -4,17 +4,22 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import cn.bmob.v3.BmobUser;
 
@@ -23,6 +28,10 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private TextView tv_income_title;
     private TextView tv_exp_title;
     private ImageView btn_personal;
+
+    private RecyclerView classify_recyclerView;
+    private RecyclerView.LayoutManager gridLayoutManager;
+    private ClassifyRecyclerViewAdapter classifyRecyclerViewAdapter;
 
     private View view;
     private PopupWindow pop_personal_window;
@@ -38,7 +47,20 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         tv_exp_title.setOnClickListener(this);
         btn_personal = (ImageView) fragment_add.findViewById(R.id.btn_personal);
         btn_personal.setOnClickListener(this);
+        classify_recyclerView = (RecyclerView) fragment_add.findViewById(R.id.classify_recyclerView);
 
+
+        ArrayList<String> test = new ArrayList<>();
+        for (int i = 0; i<10; i++){
+            test.add("测试"+i);
+        }
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),5);
+        gridLayoutManager.setReverseLayout(false);
+        gridLayoutManager.setOrientation(GridLayout.VERTICAL);
+        classify_recyclerView.setLayoutManager(gridLayoutManager);
+        classifyRecyclerViewAdapter = new ClassifyRecyclerViewAdapter(getActivity(),test);
+        classify_recyclerView.setAdapter(classifyRecyclerViewAdapter);
 
 
         return fragment_add;

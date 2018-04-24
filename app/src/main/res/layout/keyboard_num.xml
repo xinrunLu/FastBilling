@@ -5,10 +5,89 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/date_icon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="今天"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_marginTop="3dp"
+                    android:background="@color/personal_diver" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:hint="请输入备注信息（最多50个字）"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="3dp"
+                android:background="@color/personal_diver" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#E5E5E5" />
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/num_1"
@@ -18,7 +97,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:background="#E5E5E5" />
+            android:background="@color/personal_diver" />
 
         <Button
             android:id="@+id/num_2"
@@ -28,7 +107,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:background="#E5E5E5" />
+            android:background="@color/personal_diver" />
 
         <Button
             android:id="@+id/num_3"
@@ -38,7 +117,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:background="#E5E5E5" />
+            android:background="@color/personal_diver" />
 
         <Button
             android:id="@+id/num_del"
@@ -49,13 +128,13 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dip"
-        android:background="#E5E5E5" />
+        android:background="@color/personal_diver" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/num_4"
@@ -65,7 +144,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:background="#E5E5E5" />
+            android:background="@color/personal_diver" />
 
         <Button
             android:id="@+id/num_5"
@@ -75,7 +154,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:background="#E5E5E5" />
+            android:background="@color/personal_diver" />
 
         <Button
             android:id="@+id/num_6"
@@ -85,7 +164,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:background="#E5E5E5" />
+            android:background="@color/personal_diver" />
 
         <Button
             android:id="@+id/num_0"
@@ -96,13 +175,13 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dip"
-        android:background="#E5E5E5" />
+        android:background="@color/personal_diver" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/num_7"
@@ -112,7 +191,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:background="#E5E5E5" />
+            android:background="@color/personal_diver" />
 
         <Button
             android:id="@+id/num_8"
@@ -122,7 +201,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:background="#E5E5E5" />
+            android:background="@color/personal_diver" />
 
         <Button
             android:id="@+id/num_9"
@@ -132,7 +211,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:background="#E5E5E5" />
+            android:background="@color/personal_diver" />
 
         <Button
             android:id="@+id/num_comma"
