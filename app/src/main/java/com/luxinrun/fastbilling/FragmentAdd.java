@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,15 +26,17 @@ import cn.bmob.v3.BmobUser;
 
 public class FragmentAdd extends Fragment implements View.OnClickListener {
 
+    private TextView tv_add_input;
     private TextView tv_income_title;
     private TextView tv_exp_title;
+    private EditText edit_add_summary;
     private ImageView btn_personal;
+    private ImageView btn_finish;
 
     private RecyclerView classify_recyclerView;
     private RecyclerView.LayoutManager gridLayoutManager;
     private ClassifyRecyclerViewAdapter classifyRecyclerViewAdapter;
 
-    private View view;
     private PopupWindow pop_personal_window;
 
 
@@ -45,14 +48,18 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         tv_income_title.setOnClickListener(this);
         tv_exp_title = (TextView) fragment_add.findViewById(R.id.tv_exp_title);
         tv_exp_title.setOnClickListener(this);
+        tv_add_input = (TextView) fragment_add.findViewById(R.id.tv_add_input);
+        edit_add_summary = (EditText) fragment_add.findViewById(R.id.edit_add_summary);
         btn_personal = (ImageView) fragment_add.findViewById(R.id.btn_personal);
         btn_personal.setOnClickListener(this);
+        btn_finish = (ImageView) fragment_add.findViewById(R.id.btn_finish);
+        btn_finish.setOnClickListener(this);
         classify_recyclerView = (RecyclerView) fragment_add.findViewById(R.id.classify_recyclerView);
 
 
         ArrayList<String> test = new ArrayList<>();
-        for (int i = 0; i<10; i++){
-            test.add("测试"+i);
+        for (int i = 0; i<15; i++){
+            test.add("测试");
         }
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),5);
@@ -70,7 +77,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     //弹出个人设置窗口
     private void show_pop_personal() {
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.pop_personal, null);
+        View view = inflater.inflate(R.layout.pop_personal, null);
         pop_personal_window = new PopupWindow(view, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);
         pop_personal_window.setFocusable(true);
         pop_personal_window.showAtLocation(getActivity().findViewById(R.id.btn_personal), Gravity.CENTER_VERTICAL, 0, 0);
@@ -133,12 +140,16 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 pop_personal_window.dismiss();
                 break;
             case R.id.layout_backup:
+                pop_personal_window.dismiss();
                 break;
             case R.id.layout_share:
+                pop_personal_window.dismiss();
                 break;
             case R.id.layout_about:
+                pop_personal_window.dismiss();
                 break;
             case R.id.layout_feedback:
+                pop_personal_window.dismiss();
                 break;
         }
     }
