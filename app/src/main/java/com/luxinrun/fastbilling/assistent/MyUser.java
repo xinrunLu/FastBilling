@@ -1,4 +1,4 @@
-package com.luxinrun.fastbilling;
+package com.luxinrun.fastbilling.assistent;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;

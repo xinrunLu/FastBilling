@@ -1,14 +1,20 @@
-package com.luxinrun.fastbilling;
+package com.luxinrun.fastbilling.ui;
 
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.luxinrun.fastbilling.assistent.Constant;
+import com.luxinrun.fastbilling.assistent.MyUser;
+import com.luxinrun.fastbilling.R;
+import com.luxinrun.fastbilling.assistent.SharedPreferencesData;
 
 import cn.bmob.v3.BmobUser;
 
@@ -29,6 +35,9 @@ public class FragmentMain extends Activity implements View.OnClickListener {
     private ImageView fragment_add_img;
     private ImageView fragment_find_img;
 
+    private TextView fragment_detail_tv;
+    private TextView fragment_add_tv;
+    private TextView fragment_find_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,9 @@ public class FragmentMain extends Activity implements View.OnClickListener {
         fragment_detail_img = (ImageView) findViewById(R.id.fragment_detail_img);
         fragment_add_img = (ImageView) findViewById(R.id.fragment_add_img);
         fragment_find_img = (ImageView) findViewById(R.id.fragment_find_img);
+        fragment_detail_tv = (TextView) findViewById(R.id.fragment_detail_tv);
+        fragment_add_tv = (TextView) findViewById(R.id.fragment_add_tv);
+        fragment_find_tv = (TextView) findViewById(R.id.fragment_find_tv);
         fragment_detail_layout.setOnClickListener(this);
         fragment_find_layout.setOnClickListener(this);
         fragment_add_layout.setOnClickListener(this);
@@ -72,7 +84,10 @@ public class FragmentMain extends Activity implements View.OnClickListener {
         hideFragments(transaction);
         switch (index) {
             case 0:
+                TextPaint paint_detail = fragment_detail_tv.getPaint();
+                paint_detail.setFakeBoldText(true);
                 fragment_detail_img.setImageResource(R.drawable.bottom_detail_pressed);
+                fragment_detail_tv.setTextColor(getResources().getColor(R.color.colorWhite));
                 main_bottom_background.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 if (fragmentDetail == null) {
                     fragmentDetail = new FragmentDetail();
@@ -82,7 +97,10 @@ public class FragmentMain extends Activity implements View.OnClickListener {
                 }
                 break;
             case 1:
+                TextPaint paint_add = fragment_add_tv.getPaint();
+                paint_add.setFakeBoldText(true);
                 fragment_add_img.setImageResource(R.drawable.bottom_add_pressed);
+                fragment_add_tv.setTextColor(getResources().getColor(R.color.colorWhite));
                 main_bottom_background.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 if (fragmentAdd == null) {
                     fragmentAdd = new FragmentAdd();
@@ -92,7 +110,10 @@ public class FragmentMain extends Activity implements View.OnClickListener {
                 }
                 break;
             case 2:
+                TextPaint paint_find = fragment_find_tv.getPaint();
+                paint_find.setFakeBoldText(true);
                 fragment_find_img.setImageResource(R.drawable.bottom_find_pressed);
+                fragment_find_tv.setTextColor(getResources().getColor(R.color.colorWhite));
                 main_bottom_background.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 if (fragmentFind == null) {
                     fragmentFind = new FragmentFind();
@@ -110,6 +131,16 @@ public class FragmentMain extends Activity implements View.OnClickListener {
         fragment_detail_img.setImageResource(R.drawable.bottom_detail_nor);
         fragment_add_img.setImageResource(R.drawable.bottom_add_nor);
         fragment_find_img.setImageResource(R.drawable.bottom_find_nor);
+        fragment_detail_tv.setTextColor(getResources().getColor(R.color.tv_bottom_nor_color));
+        fragment_add_tv.setTextColor(getResources().getColor(R.color.tv_bottom_nor_color));
+        fragment_find_tv.setTextColor(getResources().getColor(R.color.tv_bottom_nor_color));
+        TextPaint paint_detail = fragment_detail_tv.getPaint();
+        TextPaint paint_add = fragment_add_tv.getPaint();
+        TextPaint paint_find = fragment_find_tv.getPaint();
+        paint_detail.setFakeBoldText(false);
+        paint_add.setFakeBoldText(false);
+        paint_find.setFakeBoldText(false);
+
     }
 
     private void hideFragments(FragmentTransaction transaction) {

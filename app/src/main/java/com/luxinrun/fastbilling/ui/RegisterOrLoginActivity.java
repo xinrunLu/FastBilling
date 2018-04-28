@@ -1,13 +1,16 @@
-package com.luxinrun.fastbilling;
+package com.luxinrun.fastbilling.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.luxinrun.fastbilling.assistent.Constant;
+import com.luxinrun.fastbilling.R;
+import com.luxinrun.fastbilling.assistent.SharedPreferencesData;
 
 
 public class RegisterOrLoginActivity extends AppCompatActivity implements View.OnClickListener {

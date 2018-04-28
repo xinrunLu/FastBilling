@@ -1,4 +1,4 @@
-package com.luxinrun.fastbilling;
+package com.luxinrun.fastbilling.ui;
 
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.luxinrun.fastbilling.R;
 
 public class FragmentFind extends Fragment {
 

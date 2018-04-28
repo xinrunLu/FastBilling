@@ -38,6 +38,15 @@
     </style>
 
     <!-- 数字键盘btn样式 -->
+    <style name="bottom_title_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <!-- 数字键盘btn样式 -->
     <style name="keyboard_num_btn">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

@@ -25,8 +25,11 @@
     <string name="welcome_content_cn">欢迎使用 极简记账</string>
     <string name="welcome_content_ad_cn2">体验极速记账的魅力</string>
 
-    <string name="tv_exp">支出</string>
-    <string name="tv_income">收入</string>
+    <string name="fragment_add_title">添加</string>
+    <string name="fragment_detail_title">详细</string>
+    <string name="fragment_find_title">发现</string>
+    <string name="title_exp">支出</string>
+    <string name="title_income">收入</string>
     <string name="title_activity_login">Sign in</string>
 
 
@@ -38,8 +41,12 @@
 
     <!--FragmentAdd的String-->
     <string name="title_money">账单金额</string>
+    <string name="error_money">请输入金额</string>
+    <string name="no_summary">无备注</string>
     <string name="initial_money">0.00</string>
 
+    <!--FragmentDetail的String-->
+    <string name="title_detail">明细</string>
 
     <!--键盘的String-->
     <string name="keyboard_1">1</string>
@@ -67,8 +74,134 @@
     <string name="error_invalid_password">输入的密码长度不正确</string>
     <string name="error_incorrect_password">输入的密码不正确</string>
     <string name="error_field_required">这里是必输项</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="title_activity_regeister">Regeister</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing emailcompletions."</string>
+    <string name="title_activity_register">Register</string>
+
+    <!-- 支出分类 -->
+    <string-array name="classify_title_exp">
+        <item>吃喝玩乐</item>
+        <item>买菜日用</item>
+        <item>包包服饰</item>
+        <item>交通住宿</item>
+        <item>化妆护肤</item>
+        <item>电子产品</item>
+        <item>家电装修</item>
+        <item>文教娱乐</item>
+        <item>话费通讯</item>
+        <item>加油养车</item>
+        <item>医疗健康</item>
+        <item>人情红包</item>
+        <item>小孩育儿</item>
+        <item>旅行踏青</item>
+        <item>一般其他</item>
+    </string-array>
+
+    <!-- 支出分类图片未选中 -->
+    <string-array name="classify_exp_icon_nor">
+        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_exp_icon1_nor</item>
+        <item>@drawable/classify_exp_icon2_nor</item>
+        <item>@drawable/classify_exp_icon3_nor</item>
+        <item>@drawable/classify_exp_icon4_nor</item>
+        <item>@drawable/classify_exp_icon5_nor</item>
+        <item>@drawable/classify_exp_icon6_nor</item>
+        <item>@drawable/classify_exp_icon7_nor</item>
+        <item>@drawable/classify_exp_icon8_nor</item>
+        <item>@drawable/classify_exp_icon9_nor</item>
+        <item>@drawable/classify_exp_icon10_nor</item>
+        <item>@drawable/classify_exp_icon11_nor</item>
+        <item>@drawable/classify_exp_icon12_nor</item>
+        <item>@drawable/classify_exp_icon13_nor</item>
+        <item>@drawable/classify_exp_icon14_nor</item>
+    </string-array>
+
+    <!-- 支出分类图片选中 -->
+    <string-array name="classify_exp_icon_selected">
+        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_exp_icon1_selected</item>
+        <item>@drawable/classify_exp_icon2_selected</item>
+        <item>@drawable/classify_exp_icon3_selected</item>
+        <item>@drawable/classify_exp_icon4_selected</item>
+        <item>@drawable/classify_exp_icon5_selected</item>
+        <item>@drawable/classify_exp_icon6_selected</item>
+        <item>@drawable/classify_exp_icon7_selected</item>
+        <item>@drawable/classify_exp_icon8_selected</item>
+        <item>@drawable/classify_exp_icon9_selected</item>
+        <item>@drawable/classify_exp_icon10_selected</item>
+        <item>@drawable/classify_exp_icon11_selected</item>
+        <item>@drawable/classify_exp_icon12_selected</item>
+        <item>@drawable/classify_exp_icon13_selected</item>
+        <item>@drawable/classify_exp_icon14_selected</item>
+    </string-array>
+
+    <!-- 支出分类背景颜色图片 -->
+    <string-array name="classify_exp_bg_selected">
+        <item>@drawable/classify_exp_icon_bg_pressed_0</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_1</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_2</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_3</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_4</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_5</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_6</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_7</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_8</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_9</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_10</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_11</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_12</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_13</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_14</item>
+    </string-array>
+
+    <!-- 收入分类 -->
+    <string-array name="classify_title_income">
+        <item>薪资</item>
+        <item>奖金</item>
+        <item>报销</item>
+        <item>利息</item>
+        <item>投资</item>
+        <item>兼职</item>
+        <item>红包</item>
+        <item>意外所得</item>
+        <item>其他收入</item>
+    </string-array>
+
+    <!-- 收入分类图片未选中 -->
+    <string-array name="classify_income_icon_nor">
+        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_exp_icon0_nor</item>
+    </string-array>
+
+    <!-- 收入分类图片选中 -->
+    <string-array name="classify_income_icon_selected">
+        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_exp_icon0_selected</item>
+    </string-array>
+
+    <!-- 收入分类背景颜色图片 -->
+    <string-array name="classify_income_bg_selected">
+        <item>@drawable/classify_exp_icon_bg_pressed_0</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_1</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_2</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_3</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_4</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_5</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_6</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_7</item>
+        <item>@drawable/classify_exp_icon_bg_pressed_8</item>
+    </string-array>
 </resources>

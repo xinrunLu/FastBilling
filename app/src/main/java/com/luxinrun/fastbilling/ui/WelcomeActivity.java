@@ -1,8 +1,12 @@
-package com.luxinrun.fastbilling;
+package com.luxinrun.fastbilling.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.luxinrun.fastbilling.assistent.Constant;
+import com.luxinrun.fastbilling.R;
+import com.luxinrun.fastbilling.assistent.SharedPreferencesData;
 
 import java.util.Timer;
 import java.util.TimerTask;

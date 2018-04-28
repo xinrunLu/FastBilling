@@ -1,4 +1,4 @@
-package com.luxinrun.fastbilling;
+package com.luxinrun.fastbilling.assistent;
 
 import android.app.Activity;
 import android.content.Context;

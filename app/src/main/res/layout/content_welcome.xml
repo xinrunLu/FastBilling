@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#6495ED"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.luxinrun.fastbilling.WelcomeActivity">
+    tools:context="com.luxinrun.fastbilling.ui.WelcomeActivity">
 
     <android.support.design.widget.AppBarLayout
 

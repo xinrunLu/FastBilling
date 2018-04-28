@@ -6,7 +6,7 @@
     android:background="#6495ED"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".RegisterActivity"
+    tools:context=".ui.RegisterActivity"
 
     >
 
