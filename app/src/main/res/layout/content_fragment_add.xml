@@ -37,8 +37,9 @@
             android:layout_centerVertical="true"
             android:paddingRight="16sp"
             android:text="@string/initial_money"
-            android:textColor="#FF0000"
-            android:textSize="20sp" />
+            android:textColor="@color/num_exp_color"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
     <View

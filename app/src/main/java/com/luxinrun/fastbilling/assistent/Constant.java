@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Map;
+
 public class Constant {
     /**
      * 存储的三种登陆模式
@@ -46,6 +50,33 @@ public class Constant {
         return exp_string;
     }
 
+
+    // 如果没有小数点默认加.00
+    public static String change_int_to_float(String num) {
+        char[] numChar = num.toCharArray();
+        Boolean FLAG = false;
+        String return_num = null;
+        for (int i = 0; i < numChar.length; i++) {
+            if ((numChar[i] + "").equals(".")) {
+                FLAG = true;
+            }
+        }
+        if (FLAG) {
+            String[] numString = num.split("\\.");
+            if (numString.length == 1) {
+                return_num = num + "00";
+            } else {
+                if (numString[1].length() == 1) {
+                    return_num = num + "0";
+                } else {
+                    return_num = num;
+                }
+            }
+        } else {
+            return_num = num + ".00";
+        }
+        return return_num;
+    }
 
     /**
      * 算法，小数点后两位数，小数点之前一共10位
@@ -114,6 +145,33 @@ public class Constant {
             return_num = return_num + numString[i];
         }
         return return_num;
+    }
+
+    /**
+     * 若是一位数，则前面补0返回
+     * @param num
+     * @return
+     */
+    public static String num_Format(int num) {
+        String return_num;
+        if ((num + "").length() == 1) {
+            return_num = "0" + num;
+        } else {
+            return_num = num + "";
+        }
+        return return_num;
+    }
+
+    // 获取支出所有数据的总和
+    public static String get_totle_money(ArrayList<Map<String, Object>> data) {
+        float[] money_array = new float[data.size()];
+        float sum = 0;
+        for (int i = 0; i < data.size(); i++) {
+            money_array[i] = Float.parseFloat(data.get(i).get("money").toString());
+            sum = sum + money_array[i];
+        }
+        DecimalFormat decimalFormat = new DecimalFormat(".00");// 构造方法的字符格式这里如果小数不足2位,会以0补足.
+        return decimalFormat.format(sum);
     }
 
 }

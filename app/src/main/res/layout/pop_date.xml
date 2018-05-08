@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/personal_no_color"
+    android:paddingLeft="35dp"
+    android:paddingRight="35dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:headerBackground="@color/colorPrimary"
+            android:background="@color/colorWhite"
+            >
+
+        </DatePicker>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignRight="@id/date_picker"
+            android:layout_alignLeft="@id/date_picker"
+            android:layout_below="@id/date_picker">
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_date_no"
+                android:background="@drawable/btn_date_no_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_date_yes"
+                android:background="@drawable/btn_date_yes_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="确定"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

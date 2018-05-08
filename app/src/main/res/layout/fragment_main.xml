@@ -16,11 +16,6 @@
 
     </FrameLayout>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:background="#CCCCCC" />
-
     <LinearLayout
         android:id="@+id/main_bottom_background"
         android:layout_width="match_parent"

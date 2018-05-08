@@ -34,9 +34,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "location" + " text)");
     }
 
-    public void insert(ContentValues values){
+    public void insert(ContentValues values) {
         db = getWritableDatabase();
-        db.insert("fast_billing_tab","_id", values);
+        db.insert("fast_billing_tab", "_id", values);
         db.close();
     }
 
@@ -44,6 +44,30 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Map<String, Object>> cursorList() {
         db = getReadableDatabase();
         Cursor cursor = db.query("fast_billing_tab", null, null, null, null, null, "date_time" + " DESC");
+        ArrayList<Map<String, Object>> cursorData = new ArrayList<Map<String, Object>>();
+        while (cursor.moveToNext()) {
+            HashMap<String, Object> item = new HashMap<String, Object>();
+            item.put("_id", cursor.getString(cursor.getColumnIndex("_id")));
+            item.put("date_time", cursor.getString(cursor.getColumnIndex("date_time")));
+            item.put("exp_or_income_num", cursor.getString(cursor.getColumnIndex("exp_or_income_num")));
+            item.put("exp_or_income_title", cursor.getString(cursor.getColumnIndex("exp_or_income_title")));
+            item.put("classify_num", cursor.getString(cursor.getColumnIndex("classify_num")));
+            item.put("classify_title", cursor.getString(cursor.getColumnIndex("classify_title")));
+            item.put("money", cursor.getString(cursor.getColumnIndex("money")));
+            item.put("summary", cursor.getString(cursor.getColumnIndex("summary")));
+            item.put("location", cursor.getString(cursor.getColumnIndex("location")));
+            cursorData.add(item);
+        }
+        cursor.close();
+        db.close();
+        return cursorData;
+    }
+
+    // 查询数据库某月收入或者支出
+    public ArrayList<Map<String, Object>> cursorMonth(String yearmonth, String expORincome) {
+        db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from fast_billing_tab where strftime('%Y%m', date_time) = ? AND exp_or_income_num=? order by date_time desc",
+                new String[]{yearmonth, expORincome});
         ArrayList<Map<String, Object>> cursorData = new ArrayList<Map<String, Object>>();
         while (cursor.moveToNext()) {
             HashMap<String, Object> item = new HashMap<String, Object>();

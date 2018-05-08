@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ import com.luxinrun.fastbilling.assistent.SharedPreferencesData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -42,6 +44,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
 
     private DBHelper dbHelper;
 
+    private TextView tv_add_date;
     private TextView tv_add_input;
     private TextView tv_income_title;
     private TextView tv_exp_title;
@@ -49,13 +52,18 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     private ImageView btn_personal;
     private ImageView btn_finish;
     private Button num_1, num_2, num_3, num_4, num_5, num_6, num_7, num_8, num_9, num_0, num_comma, num_del;
-
+    private LinearLayout layout_date;
     private RecyclerView classify_recyclerView;
     private RecyclerView.LayoutManager gridLayoutManager;
     private ClassifyRecyclerViewAdapter classifyRecyclerViewAdapter;
 
     private PopupWindow pop_personal_window;
+    private PopupWindow pop_date_window;
     //插入数据库的所需内容
+    Calendar calendar = Calendar.getInstance();
+    private int set_year = calendar.get(Calendar.YEAR);
+    private int set_month = calendar.get(Calendar.MONTH);
+    private int set_day = calendar.get(Calendar.DAY_OF_MONTH);
     private String[] classify_detail_choose_title;
     private String add_date;
     private int add_expORincome_num = 0;//默认进来为0，为支出
@@ -71,6 +79,21 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View fragment_add = inflater.inflate(R.layout.fragment_add, container, false);
+        initID(fragment_add);
+
+        //每次进来就默认为add_expORincome_num = 0；
+        showExpOrIncomeData(add_expORincome_num);
+        add_date = set_year + "-" + (Constant.num_Format(set_month + 1)) + "-" + Constant.num_Format(set_day);
+        tv_add_date.setText(add_date);
+        return fragment_add;
+    }
+
+    /**
+     * 初始化UI控件
+     *
+     * @param fragment_add
+     */
+    private void initID(View fragment_add) {
         num_1 = (Button) fragment_add.findViewById(R.id.num_1);
         num_1.setOnClickListener(this);
         num_2 = (Button) fragment_add.findViewById(R.id.num_2);
@@ -95,7 +118,9 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         num_comma.setOnClickListener(this);
         num_del = (Button) fragment_add.findViewById(R.id.num_del);
         num_del.setOnClickListener(this);
-
+        layout_date = (LinearLayout) fragment_add.findViewById(R.id.layout_date);
+        layout_date.setOnClickListener(this);
+        tv_add_date = (TextView) fragment_add.findViewById(R.id.tv_add_date);
         tv_income_title = (TextView) fragment_add.findViewById(R.id.tv_income_title);
         tv_income_title.setOnClickListener(this);
         tv_exp_title = (TextView) fragment_add.findViewById(R.id.tv_exp_title);
@@ -107,12 +132,6 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         btn_finish = (ImageView) fragment_add.findViewById(R.id.btn_finish);
         btn_finish.setOnClickListener(this);
         classify_recyclerView = (RecyclerView) fragment_add.findViewById(R.id.classify_recyclerView);
-
-        //每次进来就默认为add_expORincome_num = 0；
-        showExpOrIncomeData(add_expORincome_num);
-
-
-        return fragment_add;
     }
 
     /**
@@ -206,6 +225,45 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         });
     }
 
+    //弹出日期选择窗口
+    private void show_pop_date() {
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.pop_date, null);
+        pop_date_window = new PopupWindow(view, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);
+        pop_date_window.setFocusable(true);
+        pop_date_window.showAtLocation(getActivity().findViewById(R.id.btn_personal), Gravity.CENTER_VERTICAL, 0, 0);
+        pop_date_window.setOutsideTouchable(true);
+        DatePicker datepicker = (DatePicker) view.findViewById(R.id.date_picker);
+        Button btn_date_yes = (Button) view.findViewById(R.id.btn_date_yes);
+        Button btn_date_no = (Button) view.findViewById(R.id.btn_date_no);
+        datepicker.setMaxDate(new Date().getTime());
+        datepicker.init(set_year, set_month, set_day, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                set_year = year;
+                set_month = monthOfYear;
+                set_day = dayOfMonth;
+            }
+        });
+
+        btn_date_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop_date_window.dismiss();
+                add_date = set_year + "-" + (Constant.num_Format(set_month + 1)) + "-" + Constant.num_Format(set_day);
+                tv_add_date.setText(add_date);
+            }
+        });
+
+        btn_date_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop_date_window.dismiss();
+            }
+        });
+
+    }
+
     //插入一条数据
     private void insertData() {
         dbHelper = new DBHelper(getActivity());
@@ -219,14 +277,14 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 add_summary = getActivity().getString(R.string.no_summary);
             }
             Date day = new Date();
-            SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-            add_date = df.format(day);
+            SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+            add_date = add_date + " " + df.format(day);
             values.put("date_time", add_date);
             values.put("exp_or_income_num", add_expORincome_num + "");
             values.put("exp_or_income_title", add_expORincome_title);
             values.put("classify_num", add_classify_num + "");
             values.put("classify_title", classify_detail_choose_title[add_classify_num]);
-            values.put("money", add_money);
+            values.put("money", Constant.change_int_to_float(add_money));
             values.put("summary", add_summary);
             values.put("location", "无锡");
             Log.d("lxr", "date_time=" + add_date);
@@ -239,12 +297,18 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             Log.d("lxr", "location=" + "无锡");
             dbHelper.insert(values);
             //数据恢复成初始数据
+            calendar = Calendar.getInstance();
+            set_year = calendar.get(Calendar.YEAR);
+            set_month = calendar.get(Calendar.MONTH);
+            set_day = calendar.get(Calendar.DAY_OF_MONTH);
+            add_date = set_year + "-" + (Constant.num_Format(set_month + 1)) + "-" + Constant.num_Format(set_day);
+            tv_add_date.setText(add_date);
+            add_money = "0.00";
+            tv_add_input.setText(add_money);
             edit_add_summary.setText("");
             classifyRecyclerViewAdapter.setClickTemp(0);
             classifyRecyclerViewAdapter.notifyDataSetChanged();
             add_classify_num = 0;
-            add_money = "0.00";
-            tv_add_input.setText(add_money);
         }
     }
 
@@ -265,6 +329,9 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btn_personal:
                 show_pop_personal();
+                break;
+            case R.id.layout_date:
+                show_pop_date();
                 break;
             //点击透明部分退出pop
             case R.id.pop_personal_outside:
@@ -323,5 +390,15 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             add_money = "0.00";
         }
         tv_add_input.setText(add_money);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden){
+            Log.d("lxr","FragmentAdd=隐藏了");
+        }else {
+            Log.d("lxr","FragmentAdd=显示了");
+        }
     }
 }
