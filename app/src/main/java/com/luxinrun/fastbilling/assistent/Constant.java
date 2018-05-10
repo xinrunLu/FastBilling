@@ -3,9 +3,12 @@ package com.luxinrun.fastbilling.assistent;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class Constant {
@@ -172,6 +175,40 @@ public class Constant {
         }
         DecimalFormat decimalFormat = new DecimalFormat(".00");// 构造方法的字符格式这里如果小数不足2位,会以0补足.
         return decimalFormat.format(sum);
+    }
+
+    private static float get_same_classify_num(int[] classify_num_array, float[] money_array, String[] classify_title_array, int index) {
+        float sum = 0;
+        for (int i = 0; i < classify_num_array.length; i++) {
+            if (index == classify_num_array[i]) {
+                sum = sum + money_array[i];
+            }
+        }
+        return sum;
+    }
+
+    /**
+     *
+     * 获取饼状图的各个数据比例
+     */
+    public static List getPieChartData(ArrayList<Map<String, Object>> data) {
+        List<String> list = new LinkedList<String>();
+        int[] classify_num_array = new int[data.size()];
+        String[] classify_title_array = new String[data.size()];
+        float[] money_array = new float[data.size()];
+        for (int i = 0; i < data.size(); i++) {
+            classify_num_array[i] = Integer.valueOf(data.get(i).get("classify_num").toString());
+            classify_title_array[i] = data.get(i).get("classify_title").toString();
+            money_array[i] = Float.parseFloat(data.get(i).get("money").toString());
+        }
+        for (int index = 0; index < 15; index++) {
+            float sum = get_same_classify_num(classify_num_array, money_array, classify_title_array, index);
+            if (sum != 0.0) {
+                list.add(index + "=" + classify_title_array[index]+"="+ sum);
+                Log.d("lxr", index + "="+classify_title_array[index]+"=" + sum);
+            }
+        }
+        return list;
     }
 
 }

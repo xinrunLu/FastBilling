@@ -40,6 +40,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void delet(String id) {
+        db = getWritableDatabase();
+        db.delete("fast_billing_tab", "_id = ?", new String[]{id});
+    }
+
     // 查询数据库所有数据按照日期降序排列
     public ArrayList<Map<String, Object>> cursorList() {
         db = getReadableDatabase();

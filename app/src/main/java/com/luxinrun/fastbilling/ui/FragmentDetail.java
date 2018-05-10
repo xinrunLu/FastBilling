@@ -2,16 +2,22 @@ package com.luxinrun.fastbilling.ui;
 
 
 import android.app.Fragment;
-import android.graphics.Color;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.luxinrun.fastbilling.R;
@@ -40,6 +46,11 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
     private TextView detail_income_title;
     private TextView detail_exp_tv;
     private TextView detail_exp_title;
+    private ImageView btn_statistics;
+
+    private PopupWindow pop_delet_window;
+    private String long_click_position;
+    private String expORincome = "0";
 
 
     @Nullable
@@ -49,24 +60,16 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
 
         initID(fragment_detail);
 
-        refreshData("0");
+        refreshData(expORincome);
 
-
-        detailRecyclerViewAdapter.setOnItemClickListener(new DetailRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                detailRecyclerViewAdapter.deletItem(position);
-                Log.d("lxr",position+"!");
-            }
-
-
-        });
 
         return fragment_detail;
     }
 
     private void initID(View fragment_detail) {
         detail_recyclerView = (RecyclerView) fragment_detail.findViewById(R.id.detail_recyclerView);
+        btn_statistics = (ImageView) fragment_detail.findViewById(R.id.btn_statistics);
+        btn_statistics.setOnClickListener(this);
     }
 
 
@@ -91,6 +94,38 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
         detailRecyclerViewAdapter = new DetailRecyclerViewAdapter(getActivity(), data);
         detail_recyclerView.setAdapter(detailRecyclerViewAdapter);
         setHeader(detail_recyclerView, expORincome);
+
+        detailRecyclerViewAdapter.setOnItemLongClickListener(new DetailRecyclerViewAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(int position) {
+                show_delete_pop(position);
+            }
+        });
+    }
+
+    private void show_delete_pop(int position){
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.pop_delete, null);
+        pop_delet_window = new PopupWindow(view, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);
+        pop_delet_window.setFocusable(true);
+        pop_delet_window.showAtLocation(getActivity().findViewById(R.id.detail_recyclerView), Gravity.CENTER_VERTICAL, 0, 0);
+        pop_delet_window.setOutsideTouchable(true);
+        TextView delete_title = (TextView) view.findViewById(R.id.delete_title);
+        LinearLayout delete_btn_layout = (LinearLayout) view.findViewById(R.id.delete_btn_layout);
+        RelativeLayout delete_null_layout = (RelativeLayout) view.findViewById(R.id.delete_null_layout);
+        delete_btn_layout.setOnClickListener(this);
+        delete_null_layout.setOnClickListener(this);
+        String title = data.get(position).get("classify_title").toString();
+        String money = data.get(position).get("money").toString();
+        long_click_position = data.get(position).get("_id").toString();
+        expORincome = data.get(position).get("exp_or_income_num").toString();
+        delete_title.setText(title+"("+money+")");
+    }
+
+    private void delete_one_data(String position){
+        dbHelper.delet(position);
+        pop_delet_window.dismiss();
+        refreshData(expORincome);
     }
 
     private void setHeader(RecyclerView view, String expORincome) {
@@ -130,7 +165,7 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
             Log.d("lxr", "FragmentDetail=隐藏了");
         } else {
             Log.d("lxr", "FragmentDetail=显示了");
-            refreshData("0");
+            refreshData(expORincome);
         }
     }
 
@@ -138,10 +173,23 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.layout_detail_income:
-                refreshData("1");
+                expORincome = "1";
+                refreshData(expORincome);
                 break;
             case R.id.layout_detail_exp:
-                refreshData("0");
+                expORincome = "0";
+                refreshData(expORincome);
+                break;
+            case R.id.delete_null_layout:
+                pop_delet_window.dismiss();
+                break;
+            case R.id.delete_btn_layout:
+                delete_one_data(long_click_position);
+                break;
+            case R.id.btn_statistics:
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), StatisticsActivity.class);
+                startActivity(intent);
                 break;
 
         }

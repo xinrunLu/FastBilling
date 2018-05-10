@@ -16,7 +16,7 @@ import com.luxinrun.fastbilling.assistent.Constant;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
+public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecyclerViewAdapter.ViewHolder> implements View.OnClickListener,View.OnLongClickListener {
 
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_NORMAL = 1;
@@ -25,6 +25,7 @@ public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecycl
     private ArrayList<Map<String, Object>> mData;
     private Activity mContext;
     private OnItemClickListener mOnItemClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
     private int clickTemp = 0;
 
     public DetailRecyclerViewAdapter(Activity context, ArrayList<Map<String, Object>> data) {
@@ -46,16 +47,28 @@ public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecycl
         }
     }
 
+    @Override
+    public boolean onLongClick(View v) {
+        if (mOnItemLongClickListener != null){
+            mOnItemLongClickListener.onItemLongClick((Integer) v.getTag());
+        }
+        return true;
+    }
 
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-
-
+    public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener) {
+        this.mOnItemLongClickListener = mOnItemLongClickListener;
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+    }
+
+    public interface OnItemLongClickListener{
+        void onItemLongClick(int position);
     }
 
 
@@ -76,10 +89,6 @@ public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecycl
         this.clickTemp = position;
     }
 
-    public void deletItem(int position){
-        position = (mHeadView == null ? position : position+1);
-        notifyItemRemoved(position);
-    }
 
     public int getRealPosition(RecyclerView.ViewHolder holder) {
         int position = holder.getLayoutPosition();
@@ -99,6 +108,7 @@ public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecycl
         View view = View.inflate(mContext, R.layout.adapter_detail, null);
         ViewHolder viewHolder = new ViewHolder(view);
         view.setOnClickListener(this);
+        view.setOnLongClickListener(this);
         return viewHolder;
     }
 
