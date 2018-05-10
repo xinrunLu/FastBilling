@@ -77,16 +77,16 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
 
         dbHelper = new DBHelper(getActivity());
         data = dbHelper.cursorMonth(CURRENT_YEAR + Constant.num_Format(CURRENT_MONTH + 1), expORincome);
-        for (int i = 0; i < data.size(); i++) {
-            Log.d("lxr", (String) data.get(i).get("date_time").toString());
-            Log.d("lxr", (String) data.get(i).get("exp_or_income_num").toString());
-            Log.d("lxr", (String) data.get(i).get("exp_or_income_title").toString());
-            Log.d("lxr", (String) data.get(i).get("classify_num").toString());
-            Log.d("lxr", (String) data.get(i).get("classify_title").toString());
-            Log.d("lxr", (String) data.get(i).get("money").toString());
-            Log.d("lxr", (String) data.get(i).get("summary").toString());
-            Log.d("lxr", (String) data.get(i).get("location").toString());
-        }
+//        for (int i = 0; i < data.size(); i++) {
+//            Log.d("lxr", (String) data.get(i).get("date_time").toString());
+//            Log.d("lxr", (String) data.get(i).get("exp_or_income_num").toString());
+//            Log.d("lxr", (String) data.get(i).get("exp_or_income_title").toString());
+//            Log.d("lxr", (String) data.get(i).get("classify_num").toString());
+//            Log.d("lxr", (String) data.get(i).get("classify_title").toString());
+//            Log.d("lxr", (String) data.get(i).get("money").toString());
+//            Log.d("lxr", (String) data.get(i).get("summary").toString());
+//            Log.d("lxr", (String) data.get(i).get("location").toString());
+//        }
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setReverseLayout(false);
         manager.setOrientation(LinearLayout.VERTICAL);

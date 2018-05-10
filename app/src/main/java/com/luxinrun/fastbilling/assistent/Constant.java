@@ -177,7 +177,7 @@ public class Constant {
         return decimalFormat.format(sum);
     }
 
-    private static float get_same_classify_num(int[] classify_num_array, float[] money_array, String[] classify_title_array, int index) {
+    private static float get_same_classify_num(int[] classify_num_array, float[] money_array, int index) {
         float sum = 0;
         for (int i = 0; i < classify_num_array.length; i++) {
             if (index == classify_num_array[i]) {
@@ -202,10 +202,9 @@ public class Constant {
             money_array[i] = Float.parseFloat(data.get(i).get("money").toString());
         }
         for (int index = 0; index < 15; index++) {
-            float sum = get_same_classify_num(classify_num_array, money_array, classify_title_array, index);
+            float sum = get_same_classify_num(classify_num_array, money_array, index);
             if (sum != 0.0) {
-                list.add(index + "=" + classify_title_array[index]+"="+ sum);
-                Log.d("lxr", index + "="+classify_title_array[index]+"=" + sum);
+                list.add(index +"="+ sum);
             }
         }
         return list;

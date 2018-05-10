@@ -119,7 +119,7 @@ public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecycl
         final int pos = getRealPosition(holder);
         int[] resIds_bg;
         int[] resIds_icon;
-        Log.d("lxr","po=popition"+pos+"-"+position);
+//        Log.d("lxr","po=popition"+pos+"-"+position);
         String date_time = (String) mData.get(pos).get("date_time").toString();
         int exp_or_income_num = Integer.valueOf((String) mData.get(pos).get("exp_or_income_num").toString());
         String exp_or_income_title = (String) mData.get(pos).get("exp_or_income_title").toString();

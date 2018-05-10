@@ -34,6 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "location" + " text)");
     }
 
+    //插入一条数据
     public void insert(ContentValues values) {
         db = getWritableDatabase();
         db.insert("fast_billing_tab", "_id", values);

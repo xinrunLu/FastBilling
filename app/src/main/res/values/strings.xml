@@ -99,6 +99,25 @@
         <item>一般其他</item>
     </string-array>
 
+    <!-- 支出颜色分类 -->
+    <string-array name="classify_title_exp_color">
+        <item>#1296db</item> <!--闪兰色 -->
+        <item>#FFB6C1</item><!--亮粉红色-->
+        <item>#FFA500</item> <!--橙色-->
+        <item>#FA8072</item> <!--鲜肉色-->
+        <item>#EE82EE</item> <!--紫罗兰色 -->
+        <item>#DEB887</item> <!--实木色-->
+        <item>#6B8E23</item> <!--金麒麟色-->
+        <item>#13227a</item> <!--茶色 -->
+        <item>#7B68EE</item> <!--印第安红 -->
+        <item>#d4237a</item> <!--火砖色 -->
+        <item>#ADD8E6</item> <!--亮蓝色 -->
+        <item>#d81e06</item> <!--中暗蓝色 -->
+        <item>#708090</item> <!--灰石色-->
+        <item>#3CB371</item> <!--中海蓝 -->
+        <item>#2F4F4F</item> <!--暗瓦灰色 -->
+    </string-array>
+
     <!-- 支出分类图片未选中 -->
     <string-array name="classify_exp_icon_nor">
         <item>@drawable/classify_exp_icon0_nor</item>
