@@ -48,7 +48,7 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
     private TextView detail_exp_title;
     private ImageView btn_statistics;
 
-    private PopupWindow pop_delet_window;
+    private PopupWindow pop_delete_window;
     private String long_click_position;
     private String expORincome = "0";
 
@@ -106,10 +106,10 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
     private void show_delete_pop(int position){
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.pop_delete, null);
-        pop_delet_window = new PopupWindow(view, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);
-        pop_delet_window.setFocusable(true);
-        pop_delet_window.showAtLocation(getActivity().findViewById(R.id.detail_recyclerView), Gravity.CENTER_VERTICAL, 0, 0);
-        pop_delet_window.setOutsideTouchable(true);
+        pop_delete_window = new PopupWindow(view, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);
+        pop_delete_window.setFocusable(true);
+        pop_delete_window.showAtLocation(getActivity().findViewById(R.id.detail_recyclerView), Gravity.CENTER_VERTICAL, 0, 0);
+        pop_delete_window.setOutsideTouchable(true);
         TextView delete_title = (TextView) view.findViewById(R.id.delete_title);
         LinearLayout delete_btn_layout = (LinearLayout) view.findViewById(R.id.delete_btn_layout);
         RelativeLayout delete_null_layout = (RelativeLayout) view.findViewById(R.id.delete_null_layout);
@@ -124,7 +124,7 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
 
     private void delete_one_data(String position){
         dbHelper.delet(position);
-        pop_delet_window.dismiss();
+        pop_delete_window.dismiss();
         refreshData(expORincome);
     }
 
@@ -181,7 +181,7 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
                 refreshData(expORincome);
                 break;
             case R.id.delete_null_layout:
-                pop_delet_window.dismiss();
+                pop_delete_window.dismiss();
                 break;
             case R.id.delete_btn_layout:
                 delete_one_data(long_click_position);

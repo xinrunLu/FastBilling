@@ -133,14 +133,12 @@ public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecycl
         holder.detail_money.setText(money);
         holder.detail_date.setText(date_time);
         if (exp_or_income_num == 0) {
-            resIds_bg = Constant.changeDrawableArray(mContext, R.array.classify_exp_bg_selected);
             resIds_icon = Constant.changeDrawableArray(mContext, R.array.classify_exp_icon_selected);
-            holder.detail_icon_bg.setBackgroundResource(resIds_bg[classify_num]);
+            holder.detail_icon_bg.setBackgroundResource(R.drawable.classify_exp_icon_bg_pressed);
             holder.detail_img.setImageResource(resIds_icon[classify_num]);
         } else if (exp_or_income_num == 1) {
-            resIds_bg = Constant.changeDrawableArray(mContext, R.array.classify_income_bg_selected);
             resIds_icon = Constant.changeDrawableArray(mContext, R.array.classify_income_icon_selected);
-            holder.detail_icon_bg.setBackgroundResource(resIds_bg[classify_num]);
+            holder.detail_icon_bg.setBackgroundResource(R.drawable.classify_income_icon_bg_pressed);
             holder.detail_img.setImageResource(resIds_icon[classify_num]);
         }
         holder.itemView.setTag(pos);

@@ -3,14 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary">
-    <ImageView
+
+    <ImageButton
+        android:id="@+id/btn_statistics_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/btn_statistics_selector" />
+        android:background="@drawable/btn_back_selector" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -72,7 +72,7 @@ public class ClassifyRecyclerViewAdapter extends RecyclerView.Adapter<ClassifyRe
         holder.classify_tv.setText(mData[position]);
         holder.itemView.setTag(position);
         if (clickTemp == position){
-            holder.classify_icon_bg.setBackgroundResource(getBgSelected[position]);
+            holder.classify_icon_bg.setBackgroundResource(R.drawable.classify_exp_icon_bg_pressed);
             holder.classify_img.setImageResource(getIconSelected[position]);
             holder.classify_tv.setTextColor(mContext.getResources().getColor(R.color.tv_selected_color));
         }else {

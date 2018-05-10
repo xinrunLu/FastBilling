@@ -1,10 +1,16 @@
 package com.luxinrun.fastbilling.ui;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -15,22 +21,28 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.luxinrun.fastbilling.R;
+import com.luxinrun.fastbilling.adapter.DetailRecyclerViewAdapter;
+import com.luxinrun.fastbilling.adapter.StatisticsRecyclerViewAdapter;
 import com.luxinrun.fastbilling.assistent.Constant;
 import com.luxinrun.fastbilling.assistent.DBHelper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class StatisticsActivity extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity implements View.OnClickListener {
 
     Calendar calendar = Calendar.getInstance();
     private int CURRENT_YEAR = calendar.get(Calendar.YEAR);
     private int CURRENT_MONTH = calendar.get(Calendar.MONTH);
 
+    private ImageButton btn_statistics_back;
     private PieChart mChart;
+    private RecyclerView statistics_recyclerView;
+    private StatisticsRecyclerViewAdapter statisticsRecyclerViewAdapter;
     private DBHelper dbHelper;
     private ArrayList<Map<String, Object>> data;
     private String[] get_classify_num_data;
@@ -43,31 +55,47 @@ public class StatisticsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+
+        initId();
+
+        drawPieChart("0");
+
+
+    }
+
+    private void initId() {
         mChart = (PieChart) findViewById(R.id.mPieChart);
+        btn_statistics_back = (ImageButton) findViewById(R.id.btn_statistics_back);
+        btn_statistics_back.setOnClickListener(this);
+        statistics_recyclerView = (RecyclerView) findViewById(R.id.statistics_recyclerView);
+    }
+
+    private void drawPieChart(String expORincome) {
         mChart.setUsePercentValues(true);
         Description description = new Description();
         description.setText("");
         mChart.setDescription(description);
         mChart.setBackgroundResource(R.color.colorWhite);
-        mChart.setExtraOffsets(50, 10, 50, 10);       //设置pieChart图表上下左右的偏移，类似于外边距
+        mChart.setExtraOffsets(0, 15, 0, 15);       //设置pieChart图表上下左右的偏移，类似于外边距
         mChart.setDragDecelerationFrictionCoef(0.95f);//设置pieChart图表转动阻力摩擦系数[0,1]
         mChart.setRotationAngle(0);                   //设置pieChart图表起始角度
         mChart.setRotationEnabled(true);              //设置pieChart图表是否可以手动旋转
         mChart.setHighlightPerTapEnabled(true);       //设置piecahrt图表点击Item高亮是否可用
-        mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);// 设置pieChart图表展示动画效果
+        mChart.animateY(1000, Easing.EasingOption.EaseInOutQuad);// 设置pieChart图表展示动画效果
         // 设置 pieChart 图表Item文本属性
         mChart.setDrawEntryLabels(true);              //设置pieChart是否只显示饼图上百分比不显示文字（true：下面属性才有效果）
         mChart.setEntryLabelColor(getResources().getColor(R.color.tv_selected_color));       //设置pieChart图表文本字体颜色
-        mChart.setEntryLabelTextSize(8f);            //设置pieChart图表文本字体大小
+        mChart.setEntryLabelTextSize(12f);            //设置pieChart图表文本字体大小
 
         // 设置 pieChart 内部圆环属性
         mChart.setDrawHoleEnabled(true);              //是否显示PieChart内部圆环(true:下面属性才有意义)
-        mChart.setHoleRadius(40f);
+        mChart.setHoleRadius(60f);
         mChart.setTransparentCircleRadius(0f);//设置PieChart内部圆的半径(这里设置28.0f)
         mChart.setHoleColor(Color.WHITE);             //设置PieChart内部圆的颜色
         mChart.setDrawCenterText(true);               //是否绘制PieChart内部中心文本（true：下面属性才有意义）
-        mChart.setCenterText("支出");                 //设置PieChart内部圆文字的内容
-        mChart.setCenterTextSize(12f);                //设置PieChart内部圆文字的大小
+        mChart.setCenterText(getString(R.string.title_exp));                 //设置PieChart内部圆文字的内容
+        mChart.setCenterTextTypeface(Typeface.DEFAULT_BOLD);
+        mChart.setCenterTextSize(14f);                //设置PieChart内部圆文字的大小
         mChart.setCenterTextColor(getResources().getColor(R.color.tv_selected_color));         //设置PieChart内部圆文字的颜色
 
         dbHelper = new DBHelper(this);
@@ -88,24 +116,24 @@ public class StatisticsActivity extends AppCompatActivity {
         for (int i = 0; i < get_classify_num_data.length; i++) {
             get_classify_title_data[i] = aa[Integer.valueOf(get_classify_num_data[i])];
             get_classify_color_data[i] = bb[Integer.valueOf(get_classify_num_data[i])];
-            Log.d("lxr", get_classify_num_data[i] +"=" + get_classify_title_data[i]+"="+get_money_data[i]+"="+get_classify_color_data[i]);
+            Log.d("lxr", get_classify_num_data[i] + "=" + get_classify_title_data[i] + "=" + get_money_data[i] + "=" + get_classify_color_data[i]);
         }
 
 
         ArrayList<PieEntry> percent = new ArrayList<PieEntry>();
         ArrayList<Integer> colors = new ArrayList<Integer>();
-        for (int i = 0;i<get_classify_color_data.length;i++){
+        for (int i = 0; i < get_classify_color_data.length; i++) {
             colors.add(Color.parseColor(get_classify_color_data[i]));
-            PieEntry entry = new PieEntry(Float.parseFloat(get_money_data[i]),get_classify_title_data[i]);
+            PieEntry entry = new PieEntry(Float.parseFloat(get_money_data[i]), get_classify_title_data[i]);
             percent.add(entry);
         }
 
-        PieDataSet pieDataSet = new PieDataSet(percent,"");
+        PieDataSet pieDataSet = new PieDataSet(percent, "");
         pieDataSet.setSliceSpace(3f);
         pieDataSet.setColors(colors);
         pieDataSet.setYValuePosition(PieDataSet.ValuePosition.INSIDE_SLICE);
         pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        pieDataSet.setValueLinePart1Length(0.6f);
+        pieDataSet.setValueLinePart1Length(0.5f);
 
         PieData pieData = new PieData(pieDataSet);
         pieData.setDrawValues(true);
@@ -119,5 +147,29 @@ public class StatisticsActivity extends AppCompatActivity {
         legend.setEnabled(false);
 
 
+        ArrayList<Map<String, Object>> totalData = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < get_classify_num_data.length; i++) {
+            HashMap<String, Object> item = new HashMap<String, Object>();
+            item.put("classify_num",get_classify_num_data[i]);
+            item.put("classify_title",get_classify_title_data[i]);
+            item.put("money",get_money_data[i]);
+            item.put("color",get_classify_color_data[i]);
+            totalData.add(item);
+        }
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setReverseLayout(false);
+        manager.setOrientation(LinearLayout.VERTICAL);
+        statistics_recyclerView.setLayoutManager(manager);
+        statisticsRecyclerViewAdapter = new StatisticsRecyclerViewAdapter(this, totalData,"0");
+        statistics_recyclerView.setAdapter(statisticsRecyclerViewAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_statistics_back:
+                this.finish();
+                break;
+        }
     }
 }
