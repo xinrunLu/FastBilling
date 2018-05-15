@@ -23,15 +23,33 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/statistics_money"
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="normal" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/statistics_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_gravity="right"
+                android:id="@+id/statistics_money_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/personal_tv_color"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -13,6 +13,7 @@
     <color name="tv_selected_color">#000000</color> <!--字体选中时候为黑色 -->
     <color name="tv_nor_color">#8a8a8a</color> <!--字体未选中时候为黑色 -->
     <color name="tv_bottom_nor_color">#dbdbdb</color> <!--底部菜单栏字体未选中时候的颜色 -->
+
     <color name="num_exp_color">#FF5151</color> <!--支出的颜色 -->
     <color name="num_income_color">#009100</color> <!--收入的颜色 -->
 

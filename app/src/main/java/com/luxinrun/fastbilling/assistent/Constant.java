@@ -1,12 +1,17 @@
 package com.luxinrun.fastbilling.assistent;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.Log;
 
+import com.luxinrun.fastbilling.R;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -123,6 +128,7 @@ public class Constant {
 
     /**
      * 判断小数点唯一性后返回
+     *
      * @param num
      * @return
      */
@@ -152,6 +158,7 @@ public class Constant {
 
     /**
      * 若是一位数，则前面补0返回
+     *
      * @param num
      * @return
      */
@@ -177,22 +184,27 @@ public class Constant {
         return decimalFormat.format(sum);
     }
 
-    private static float get_same_classify_num(int[] classify_num_array, float[] money_array, int index) {
+    private static ContentValues get_same_classify_sum(int[] classify_num_array, float[] money_array, int index) {
         float sum = 0;
+        int num = 0;
+        ContentValues values = new ContentValues();
         for (int i = 0; i < classify_num_array.length; i++) {
             if (index == classify_num_array[i]) {
                 sum = sum + money_array[i];
+                num = num + 1;
             }
         }
-        return sum;
+        values.put("sum",sum);
+        values.put("num", num);
+        return values;
     }
 
+
     /**
-     *
-     * 获取饼状图的各个数据比例
+     * 获取饼状图的各个数据
      */
-    public static List getPieChartData(ArrayList<Map<String, Object>> data) {
-        List<String> list = new LinkedList<String>();
+    public static ArrayList getPieChartData(Activity activity, ArrayList<Map<String, Object>> data) {
+        ArrayList<Map<String,Object>> arrayList = new ArrayList<>();
         int[] classify_num_array = new int[data.size()];
         String[] classify_title_array = new String[data.size()];
         float[] money_array = new float[data.size()];
@@ -202,12 +214,21 @@ public class Constant {
             money_array[i] = Float.parseFloat(data.get(i).get("money").toString());
         }
         for (int index = 0; index < 15; index++) {
-            float sum = get_same_classify_num(classify_num_array, money_array, index);
+            ContentValues values = get_same_classify_sum(classify_num_array, money_array, index);
+            float sum = Float.parseFloat(values.get("sum").toString());
+            String money_num = values.get("num").toString();
             if (sum != 0.0) {
-                list.add(index +"="+ sum);
+                HashMap<String, Object> item = new HashMap<String, Object>();
+                item.put("classify_num",index+"");
+                item.put("classify_title",Constant.changeStringArray(activity, R.array.classify_title_exp)[index]);
+                item.put("money",Constant.change_int_to_float(sum+""));
+                item.put("money_num",money_num);
+                item.put("color",Constant.changeStringArray(activity, R.array.classify_title_exp_color)[index]);
+                arrayList.add(item);
+                Log.d("lxr","方法2="+index+Constant.changeStringArray(activity, R.array.classify_title_exp)[index]+sum);
             }
         }
-        return list;
+        return arrayList;
     }
 
 }

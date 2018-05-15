@@ -66,8 +66,10 @@ public class StatisticsRecyclerViewAdapter extends RecyclerView.Adapter<Statisti
         int classify_num = Integer.valueOf(mData.get(position).get("classify_num").toString());
         String classify_title = mData.get(position).get("classify_title").toString();
         String money = mData.get(position).get("money").toString();
+        String money_num = mData.get(position).get("money_num").toString();
         holder.statistics_title.setText(classify_title);
         holder.statistics_money.setText(money);
+        holder.statistics_money_num.setText(money_num+"笔");
         if (expORincome.equals("0")) {
             resIds_icon = Constant.changeDrawableArray(mContext, R.array.classify_exp_icon_selected);
             holder.statistics_icon_bg.setBackgroundResource(R.drawable.classify_exp_icon_bg_pressed);
@@ -90,6 +92,7 @@ public class StatisticsRecyclerViewAdapter extends RecyclerView.Adapter<Statisti
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView statistics_money;
+        TextView statistics_money_num;
         TextView statistics_title;
         ImageView statistics_img;
         RelativeLayout statistics_icon_bg;
@@ -97,6 +100,7 @@ public class StatisticsRecyclerViewAdapter extends RecyclerView.Adapter<Statisti
         public ViewHolder(View itemView) {
             super(itemView);
             statistics_money = (TextView) itemView.findViewById(R.id.statistics_money);
+            statistics_money_num = (TextView) itemView.findViewById(R.id.statistics_money_num);
             statistics_title = (TextView) itemView.findViewById(R.id.statistics_title);
             statistics_img = (ImageView) itemView.findViewById(R.id.statistics_img);
             statistics_icon_bg = (RelativeLayout) itemView.findViewById(R.id.statistics_icon_bg);

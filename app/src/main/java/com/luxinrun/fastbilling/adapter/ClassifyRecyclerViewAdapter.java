@@ -13,14 +13,14 @@ import com.luxinrun.fastbilling.R;
 public class ClassifyRecyclerViewAdapter extends RecyclerView.Adapter<ClassifyRecyclerViewAdapter.ViewHolder> implements View.OnClickListener{
 
     private String[] mData;
-    private int[] getBgSelected;
+    private int getBgSelected;
     private int[] getIconNor;
     private int[] getIconSelected;
     private Context mContext;
     private OnItemClickListener mOnItemClickListener;
     private int clickTemp = 0;
 
-    public ClassifyRecyclerViewAdapter(Context context, String[] data, int[] bgSelected, int[] iconNor, int[] iconSelected) {
+    public ClassifyRecyclerViewAdapter(Context context, String[] data, int bgSelected, int[] iconNor, int[] iconSelected) {
         this.mContext = context;
         this.mData = data;
         this.getBgSelected = bgSelected;
@@ -72,7 +72,7 @@ public class ClassifyRecyclerViewAdapter extends RecyclerView.Adapter<ClassifyRe
         holder.classify_tv.setText(mData[position]);
         holder.itemView.setTag(position);
         if (clickTemp == position){
-            holder.classify_icon_bg.setBackgroundResource(R.drawable.classify_exp_icon_bg_pressed);
+            holder.classify_icon_bg.setBackgroundResource(getBgSelected);
             holder.classify_img.setImageResource(getIconSelected[position]);
             holder.classify_tv.setTextColor(mContext.getResources().getColor(R.color.tv_selected_color));
         }else {

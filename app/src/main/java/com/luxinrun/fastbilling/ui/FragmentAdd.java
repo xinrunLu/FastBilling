@@ -146,6 +146,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         gridLayoutManager.setOrientation(GridLayout.VERTICAL);
         classify_recyclerView.setLayoutManager(gridLayoutManager);
         if (which == 0) {
+            tv_add_input.setTextColor(getResources().getColor(R.color.num_exp_color));
             tv_exp_title.setTextColor(getResources().getColor(R.color.colorPrimary));
             tv_exp_title.setBackgroundResource(R.drawable.tv_exp_bg_selected);
             tv_income_title.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -155,10 +156,11 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             classify_detail_choose_title = Constant.changeStringArray(getActivity(), R.array.classify_title_exp);
             classifyRecyclerViewAdapter = new ClassifyRecyclerViewAdapter(getActivity(),
                     classify_detail_choose_title,
-                    Constant.changeDrawableArray(getActivity(), R.array.classify_exp_bg_selected),
+                    R.drawable.classify_exp_icon_bg_pressed,
                     Constant.changeDrawableArray(getActivity(), R.array.classify_exp_icon_nor),
                     Constant.changeDrawableArray(getActivity(), R.array.classify_exp_icon_selected));
         } else if (which == 1) {
+            tv_add_input.setTextColor(getResources().getColor(R.color.num_income_color));
             tv_exp_title.setTextColor(getResources().getColor(R.color.colorWhite));
             tv_exp_title.setBackgroundResource(R.drawable.tv_exp_bg_nor);
             tv_income_title.setTextColor(getResources().getColor(R.color.colorPrimary));
@@ -168,7 +170,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             classify_detail_choose_title = Constant.changeStringArray(getActivity(), R.array.classify_title_income);
             classifyRecyclerViewAdapter = new ClassifyRecyclerViewAdapter(getActivity(),
                     classify_detail_choose_title,
-                    Constant.changeDrawableArray(getActivity(), R.array.classify_income_bg_selected),
+                    R.drawable.classify_income_icon_bg_pressed,
                     Constant.changeDrawableArray(getActivity(), R.array.classify_income_icon_nor),
                     Constant.changeDrawableArray(getActivity(), R.array.classify_income_icon_selected));
         }
@@ -395,10 +397,10 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (hidden){
-            Log.d("lxr","FragmentAdd=隐藏了");
-        }else {
-            Log.d("lxr","FragmentAdd=显示了");
+        if (hidden) {
+            Log.d("lxr", "FragmentAdd=隐藏了");
+        } else {
+            Log.d("lxr", "FragmentAdd=显示了");
         }
     }
 }
