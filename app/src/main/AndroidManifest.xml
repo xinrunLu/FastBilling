@@ -40,6 +40,7 @@
             android:name=".ui.FragmentMain"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".ui.StatisticsActivity" />
+
     </application>
 
 </manifest>

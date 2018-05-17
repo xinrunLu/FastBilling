@@ -199,11 +199,26 @@ public class Constant {
         return values;
     }
 
+    public static ArrayList getSameClassifyData(Activity activity, ArrayList<Map<String, Object>> data, int classify_num){
+        ArrayList<Map<String,Object>> arrayList = new ArrayList<>();
+        for (int i = 0; i < data.size(); i++) {
+            if (Integer.valueOf(data.get(i).get("classify_num").toString()) == classify_num){
+                Log.d("lxr","step="+2);
+                HashMap<String, Object> item = new HashMap<String, Object>();
+                item.put("same_classify_date",data.get(i).get("date_time").toString());
+                item.put("same_classify_summary",data.get(i).get("summary").toString());
+                item.put("same_classify_money",data.get(i).get("money").toString());
+                arrayList.add(item);
+            }
+        }
+        return  arrayList;
+    }
+
 
     /**
      * 获取饼状图的各个数据
      */
-    public static ArrayList getPieChartData(Activity activity, ArrayList<Map<String, Object>> data) {
+    public static ArrayList getPieChartData(Activity activity, ArrayList<Map<String, Object>> data, String expORincome) {
         ArrayList<Map<String,Object>> arrayList = new ArrayList<>();
         int[] classify_num_array = new int[data.size()];
         String[] classify_title_array = new String[data.size()];
@@ -220,10 +235,15 @@ public class Constant {
             if (sum != 0.0) {
                 HashMap<String, Object> item = new HashMap<String, Object>();
                 item.put("classify_num",index+"");
-                item.put("classify_title",Constant.changeStringArray(activity, R.array.classify_title_exp)[index]);
                 item.put("money",Constant.change_int_to_float(sum+""));
                 item.put("money_num",money_num);
-                item.put("color",Constant.changeStringArray(activity, R.array.classify_title_exp_color)[index]);
+                if (expORincome.equals("0")){
+                    item.put("classify_title",Constant.changeStringArray(activity, R.array.classify_title_exp)[index]);
+                    item.put("color",Constant.changeStringArray(activity, R.array.classify_title_exp_color)[index]);
+                }else {
+                    item.put("classify_title",Constant.changeStringArray(activity, R.array.classify_title_income)[index]);
+                    item.put("color",Constant.changeStringArray(activity, R.array.classify_title_income_color)[index]);
+                }
                 arrayList.add(item);
                 Log.d("lxr","方法2="+index+Constant.changeStringArray(activity, R.array.classify_title_exp)[index]+sum);
             }

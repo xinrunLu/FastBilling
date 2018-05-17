@@ -139,10 +139,14 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
         detail_income_title = (TextView) header.findViewById(R.id.detail_income_title);
         detail_exp_tv = (TextView) header.findViewById(R.id.detail_exp_tv);
         detail_exp_title = (TextView) header.findViewById(R.id.detail_exp_title);
+        detail_budget_title.setText((CURRENT_MONTH + 1) + getString(R.string.month_budget));
+        detail_budget_tv.setOnClickListener(this);
         detail_exp_title.setText((CURRENT_MONTH + 1) + getString(R.string.month_exp));
-        detail_exp_tv.setText(Constant.get_totle_money(dbHelper.cursorMonth(CURRENT_YEAR + Constant.num_Format(CURRENT_MONTH + 1), "0")));
+        String total_exp = Constant.get_totle_money(dbHelper.cursorMonth(CURRENT_YEAR + Constant.num_Format(CURRENT_MONTH + 1), "0"));
+        detail_exp_tv.setText(total_exp);
         detail_income_title.setText((CURRENT_MONTH + 1) + getString(R.string.month_income));
         detail_income_tv.setText(Constant.get_totle_money(dbHelper.cursorMonth(CURRENT_YEAR + Constant.num_Format(CURRENT_MONTH + 1), "1")));
+        detail_budget_tv.setText((10000.00-Float.parseFloat(total_exp))+"");
         if (expORincome.equals("0")){
             detail_exp_tv.setTextColor(getResources().getColor(R.color.num_exp_color));
             detail_exp_title.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -179,6 +183,9 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
             case R.id.layout_detail_exp:
                 expORincome = "0";
                 refreshData(expORincome);
+                break;
+            case R.id.detail_budget_tv:
+
                 break;
             case R.id.delete_null_layout:
                 pop_delete_window.dismiss();

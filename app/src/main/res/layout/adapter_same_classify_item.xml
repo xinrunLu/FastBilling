@@ -11,20 +11,19 @@
         android:padding="16dp">
 
         <TextView
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:layout_centerVertical="true"
             android:id="@+id/same_item_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1."/>
+            android:layout_centerVertical="true"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/same_item_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/same_item_num"
             android:orientation="vertical">
 
             <TextView
@@ -33,8 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:textColor="#000000"
-                android:textSize="14sp"
-                android:text="2018-05-15"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/same_item_summary"
@@ -42,8 +40,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#666666"
                 android:textSize="12sp"
-                android:textStyle="normal"
-                android:text="summary"/>
+                android:textStyle="normal" />
 
         </LinearLayout>
 
@@ -55,8 +52,7 @@
             android:layout_centerVertical="true"
             android:textColor="#000000"
             android:textSize="16sp"
-            android:textStyle="normal"
-            android:text="200.00"/>
+            android:textStyle="normal" />
     </RelativeLayout>
 
     <View

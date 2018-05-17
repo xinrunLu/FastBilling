@@ -47,9 +47,17 @@
 
     <!--FragmentDetail的String-->
     <string name="title_detail">明细</string>
+    <string name="month_budget">月预算</string>
     <string name="month_income">月收入</string>
     <string name="month_exp">月支出</string>
     <string name="delete">删除</string>
+
+    <!--Statistics的String-->
+    <string name="sure_choose_date">确定</string>
+    <string name="start_date">起始日期</string>
+    <string name="end_date">结束日期</string>
+    <string name="to_append">至</string>
+    <string name="error_date_choose">起始日期不能大于等于结束日期</string>
 
     <!--键盘的String-->
     <string name="keyboard_1">1</string>
@@ -101,20 +109,20 @@
 
     <!-- 支出颜色分类 -->
     <string-array name="classify_title_exp_color">
-        <item>#4D0000</item>
-        <item>#600000</item>
+        <item>#844200</item>
+        <item>#BB5E00</item>
         <item>#750000</item>
-        <item>#930000</item>
+        <item>#EA7500</item>
         <item>#AE0000</item>
-        <item>#CE0000</item>
+        <item>#FF9224</item>
         <item>#EA0000</item>
-        <item>#FF0000</item>
-        <item>#FF2D2D</item>
+        <item>#FFAF60</item>
         <item>#FF5151</item>
+        <item>#FFC78E</item>
         <item>#FF7575</item>
-        <item>#FF9797</item>
+        <item>#FFDC89</item>
         <item>#FFB5B5</item>
-        <item>#FFD2D2</item>
+        <item>#FFEEDD</item>
         <item>#FFECEC</item>
     </string-array>
 
@@ -193,18 +201,12 @@
         <item>#006000</item>
         <item>#007500</item>
         <item>#009100</item>
-        <item>#00A600</item>
         <item>#00BB00</item>
-        <item>#00DB00</item>
         <item>#00EC00</item>
-        <item>#28FF28</item>
-        <item>#53FF53</item>
         <item>#79FF79</item>
-        <item>#93FF93</item>
         <item>#A6FFA6</item>
-        <item>#BBFFBB</item>
         <item>#CEFFCE</item>
-        <item>#DFFFDF</item>
+        <item>#F0FFF0</item>
     </string-array>
 
     <!-- 收入分类图片未选中 -->
