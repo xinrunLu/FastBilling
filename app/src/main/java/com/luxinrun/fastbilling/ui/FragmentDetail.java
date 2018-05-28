@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -24,6 +26,7 @@ import com.luxinrun.fastbilling.R;
 import com.luxinrun.fastbilling.adapter.DetailRecyclerViewAdapter;
 import com.luxinrun.fastbilling.assistent.Constant;
 import com.luxinrun.fastbilling.assistent.DBHelper;
+import com.luxinrun.fastbilling.assistent.SharedPreferencesData;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,6 +43,7 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
     private DBHelper dbHelper;
     private ArrayList<Map<String, Object>> data;
 
+    private EditText editText_budget;
     private TextView detail_budget_tv;
     private TextView detail_budget_title;
     private TextView detail_income_tv;
@@ -49,8 +53,10 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
     private ImageView btn_statistics;
 
     private PopupWindow pop_delete_window;
+    private PopupWindow pop_budget_window;
     private String long_click_position;
     private String expORincome = "0";
+    private String total_exp;
 
 
     @Nullable
@@ -122,6 +128,27 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
         delete_title.setText(title+"("+money+")");
     }
 
+    private void show_budget_pop(){
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.pop_budget, null);
+        pop_budget_window = new PopupWindow(view, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);
+        pop_budget_window.setFocusable(true);
+        pop_budget_window.showAtLocation(getActivity().findViewById(R.id.detail_recyclerView), Gravity.CENTER_VERTICAL, 0, 0);
+        pop_budget_window.setOutsideTouchable(true);
+        editText_budget = (EditText) view.findViewById(R.id.editText_budget);
+        editText_budget.setText(SharedPreferencesData.get_budget(getActivity()));
+        Button btn_budget_cancel = (Button) view.findViewById(R.id.btn_budget_cancel);
+        Button btn_budget_ok = (Button) view.findViewById(R.id.btn_budget_ok);
+        btn_budget_cancel.setOnClickListener(this);
+        btn_budget_ok.setOnClickListener(this);
+    }
+
+    private void saveBudgetAndRefresh() {
+        String budget = editText_budget.getText().toString();
+        SharedPreferencesData.save_budget(getActivity(), budget);
+        detail_budget_tv.setText((Float.parseFloat(SharedPreferencesData.get_budget(getActivity()))-Float.parseFloat(total_exp))+"");
+    }
+
     private void delete_one_data(String position){
         dbHelper.delet(position);
         pop_delete_window.dismiss();
@@ -140,13 +167,14 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
         detail_exp_tv = (TextView) header.findViewById(R.id.detail_exp_tv);
         detail_exp_title = (TextView) header.findViewById(R.id.detail_exp_title);
         detail_budget_title.setText((CURRENT_MONTH + 1) + getString(R.string.month_budget));
+        detail_budget_tv.setText(SharedPreferencesData.get_budget(getActivity()));
         detail_budget_tv.setOnClickListener(this);
         detail_exp_title.setText((CURRENT_MONTH + 1) + getString(R.string.month_exp));
-        String total_exp = Constant.get_totle_money(dbHelper.cursorMonth(CURRENT_YEAR + Constant.num_Format(CURRENT_MONTH + 1), "0"));
+        total_exp = Constant.get_totle_money(dbHelper.cursorMonth(CURRENT_YEAR + Constant.num_Format(CURRENT_MONTH + 1), "0"));
         detail_exp_tv.setText(total_exp);
         detail_income_title.setText((CURRENT_MONTH + 1) + getString(R.string.month_income));
         detail_income_tv.setText(Constant.get_totle_money(dbHelper.cursorMonth(CURRENT_YEAR + Constant.num_Format(CURRENT_MONTH + 1), "1")));
-        detail_budget_tv.setText((10000.00-Float.parseFloat(total_exp))+"");
+        detail_budget_tv.setText((Float.parseFloat(SharedPreferencesData.get_budget(getActivity()))-Float.parseFloat(total_exp))+"");
         if (expORincome.equals("0")){
             detail_exp_tv.setTextColor(getResources().getColor(R.color.num_exp_color));
             detail_exp_title.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -185,7 +213,12 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
                 refreshData(expORincome);
                 break;
             case R.id.detail_budget_tv:
-
+                show_budget_pop();
+                break;
+            case R.id.btn_budget_ok:
+                saveBudgetAndRefresh();
+            case R.id.btn_budget_cancel:
+                pop_budget_window.dismiss();
                 break;
             case R.id.delete_null_layout:
                 pop_delete_window.dismiss();
@@ -201,4 +234,5 @@ public class FragmentDetail extends Fragment implements View.OnClickListener {
 
         }
     }
+
 }

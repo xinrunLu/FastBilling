@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -40,14 +41,22 @@ public class RegisterOrLoginActivity extends AppCompatActivity implements View.O
 
     }
 
+
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (SharedPreferencesData.get_login_state(this).equals(Constant.STATE_LOGIN)){
-            Intent intent = new Intent();
-            intent.setClass(this, FragmentMain.class);
-            startActivity(intent);
-            this.finish();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case Constant.to_Login:
+                if (resultCode == Constant.LOGIN_SUCCESS) {
+                    String username = data.getStringExtra("username");
+                    String password = data.getStringExtra("password");
+                    Log.d("lxr",username+"--------"+password);
+                    Intent intent = new Intent();
+                    intent.setClass(this, FragmentMain.class);
+                    startActivity(intent);
+                    this.finish();
+                }
+                break;
         }
     }
 
@@ -57,7 +66,7 @@ public class RegisterOrLoginActivity extends AppCompatActivity implements View.O
         switch (v.getId()) {
             case R.id.btn_visitor:
                 //游客模式下进入用户名默认为当前的时间
-                String username = String.valueOf(System.currentTimeMillis()/1000);
+                String username = String.valueOf(System.currentTimeMillis() / 1000);
                 //保存与游客用户名
                 SharedPreferencesData.save_username(this, username);
                 //保存游客模式
@@ -73,7 +82,7 @@ public class RegisterOrLoginActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.btn_login:
                 intent.setClass(this, LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, Constant.to_Login);
                 break;
             case R.id.ivBtn_app_exit:
                 this.finish();

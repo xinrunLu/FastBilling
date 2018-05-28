@@ -47,10 +47,13 @@
 
     <!--FragmentDetail的String-->
     <string name="title_detail">明细</string>
+    <string name="total_budget">总预算</string>
     <string name="month_budget">月预算</string>
     <string name="month_income">月收入</string>
     <string name="month_exp">月支出</string>
     <string name="delete">删除</string>
+    <string name="budget_cancel">取消</string>
+    <string name="budget_ok">确定</string>
 
     <!--Statistics的String-->
     <string name="sure_choose_date">确定</string>
@@ -211,28 +214,28 @@
 
     <!-- 收入分类图片未选中 -->
     <string-array name="classify_income_icon_nor">
-        <item>@drawable/classify_exp_icon0_nor</item>
-        <item>@drawable/classify_exp_icon0_nor</item>
-        <item>@drawable/classify_exp_icon0_nor</item>
-        <item>@drawable/classify_exp_icon0_nor</item>
-        <item>@drawable/classify_exp_icon0_nor</item>
-        <item>@drawable/classify_exp_icon0_nor</item>
-        <item>@drawable/classify_exp_icon0_nor</item>
-        <item>@drawable/classify_exp_icon0_nor</item>
-        <item>@drawable/classify_exp_icon0_nor</item>
+        <item>@drawable/classify_income_icon4_nor</item>
+        <item>@drawable/classify_income_icon4_nor</item>
+        <item>@drawable/classify_income_icon4_nor</item>
+        <item>@drawable/classify_income_icon4_nor</item>
+        <item>@drawable/classify_income_icon4_nor</item>
+        <item>@drawable/classify_income_icon4_nor</item>
+        <item>@drawable/classify_income_icon6_nor</item>
+        <item>@drawable/classify_income_icon4_nor</item>
+        <item>@drawable/classify_income_icon4_nor</item>
     </string-array>
 
     <!-- 收入分类图片选中 -->
     <string-array name="classify_income_icon_selected">
-        <item>@drawable/classify_exp_icon0_selected</item>
-        <item>@drawable/classify_exp_icon0_selected</item>
-        <item>@drawable/classify_exp_icon0_selected</item>
-        <item>@drawable/classify_exp_icon0_selected</item>
-        <item>@drawable/classify_exp_icon0_selected</item>
-        <item>@drawable/classify_exp_icon0_selected</item>
-        <item>@drawable/classify_exp_icon0_selected</item>
-        <item>@drawable/classify_exp_icon0_selected</item>
-        <item>@drawable/classify_exp_icon0_selected</item>
+        <item>@drawable/classify_income_icon4_pressed</item>
+        <item>@drawable/classify_income_icon4_pressed</item>
+        <item>@drawable/classify_income_icon4_pressed</item>
+        <item>@drawable/classify_income_icon4_pressed</item>
+        <item>@drawable/classify_income_icon4_pressed</item>
+        <item>@drawable/classify_income_icon4_pressed</item>
+        <item>@drawable/classify_income_icon6_pressed</item>
+        <item>@drawable/classify_income_icon4_pressed</item>
+        <item>@drawable/classify_income_icon4_pressed</item>
     </string-array>
 
     <!-- 收入分类背景颜色图片 -->

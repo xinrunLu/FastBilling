@@ -3,6 +3,7 @@ package com.luxinrun.fastbilling.ui;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -39,6 +40,7 @@ import java.util.Date;
 import java.util.Map;
 
 import cn.bmob.v3.BmobUser;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class FragmentAdd extends Fragment implements View.OnClickListener {
 
@@ -194,6 +196,8 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         pop_personal_window.setFocusable(true);
         pop_personal_window.showAtLocation(getActivity().findViewById(R.id.btn_personal), Gravity.CENTER_VERTICAL, 0, 0);
         pop_personal_window.setOutsideTouchable(true);
+        ImageView img_head_portrait = (ImageView) view.findViewById(R.id.img_head_portrait);
+        img_head_portrait.setOnClickListener(this);
         RelativeLayout layout_backup = (RelativeLayout) view.findViewById(R.id.layout_backup);
         layout_backup.setOnClickListener(this);
         RelativeLayout layout_share = (RelativeLayout) view.findViewById(R.id.layout_share);
@@ -314,6 +318,64 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void visitorTOLogin() {
+        String login_state = SharedPreferencesData.get_login_state(getActivity());
+        if (login_state.equals(Constant.STATE_VISITOR)) {
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), LoginActivity.class);
+            startActivityForResult(intent, Constant.to_Login);
+            pop_personal_window.dismiss();
+        }
+    }
+
+    private void refreshUserInfo() {
+
+    }
+
+    private void showShare() {
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+        oks.setTitle("分享");
+        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+        oks.setTitleUrl("http://sharesdk.cn");
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText("我是分享文本");
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl("http://sharesdk.cn");
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("我是测试评论文本");
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl("http://sharesdk.cn");
+
+        // 启动分享GUI
+        oks.show(getActivity());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case Constant.to_Login:
+                if (resultCode == Constant.LOGIN_SUCCESS) {
+                    String username = data.getStringExtra("username");
+                    String password = data.getStringExtra("password");
+                    Log.d("lxr", username + "--------" + password);
+                    //刷新用户名字
+                    refreshUserInfo();
+                }
+                break;
+        }
+    }
+
     @Override
     public void onClick(View view) {
         if (add_money.equals("0.00")) {
@@ -339,11 +401,18 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
             case R.id.pop_personal_outside:
                 pop_personal_window.dismiss();
                 break;
+            case R.id.img_head_portrait:
+                visitorTOLogin();
+                break;
             case R.id.layout_backup:
+                if (SharedPreferencesData.get_login_state(getActivity()).equals(Constant.STATE_LOGIN)) {
+
+                }
                 pop_personal_window.dismiss();
                 break;
             case R.id.layout_share:
                 pop_personal_window.dismiss();
+                showShare();
                 break;
             case R.id.layout_about:
                 pop_personal_window.dismiss();

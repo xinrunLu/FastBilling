@@ -67,6 +67,8 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
     private PopupWindow chooseDatePopWindow;
     private ImageButton btn_statistics_back;
     private TextView statistics_date_tv;
+    private TextView statistics_exp_tv;
+    private TextView statistics_income_tv;
     private PieChart mChart;
     private RecyclerView statistics_recyclerView;
     private StatisticsRecyclerViewAdapter statisticsRecyclerViewAdapter;
@@ -103,6 +105,11 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
         btn_statistics_back.setOnClickListener(this);
         statistics_date_tv = (TextView) findViewById(R.id.statistics_date_tv);
         statistics_date_tv.setOnClickListener(this);
+        statistics_exp_tv = (TextView) findViewById(R.id.statistics_exp_tv);
+        statistics_exp_tv.setOnClickListener(this);
+        statistics_income_tv = (TextView) findViewById(R.id.statistics_income_tv);
+        statistics_income_tv.setOnClickListener(this);
+
         statistics_recyclerView = (RecyclerView) findViewById(R.id.statistics_recyclerView);
         initDateChoose();
     }
@@ -145,8 +152,18 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
         mChart.setDrawCenterText(true);               //是否绘制PieChart内部中心文本（true：下面属性才有意义）
         if (expORincome.equals("0")){
             mChart.setCenterText(getString(R.string.title_exp));
+            statistics_exp_tv.setTextColor(getResources().getColor(R.color.colorPrimary));
+            statistics_exp_tv.setBackgroundResource(R.drawable.tv_exp_bg_selected);
+            statistics_income_tv.setTextColor(getResources().getColor(R.color.colorWhite));
+            statistics_income_tv.setBackgroundResource(R.drawable.tv_income_bg_nor);
+            expORincome = "0";
         }else {
             mChart.setCenterText(getString(R.string.title_income));
+            statistics_income_tv.setTextColor(getResources().getColor(R.color.colorPrimary));
+            statistics_income_tv.setBackgroundResource(R.drawable.tv_income_bg_selected);
+            statistics_exp_tv.setTextColor(getResources().getColor(R.color.colorWhite));
+            statistics_exp_tv.setBackgroundResource(R.drawable.tv_exp_bg_nor);
+            expORincome = "1";
         }
         mChart.setCenterTextTypeface(Typeface.DEFAULT_BOLD);
         mChart.setCenterTextSize(14f);                //设置PieChart内部圆文字的大小
@@ -273,14 +290,18 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
         sameItemPopWindow.setFocusable(true);
         sameItemPopWindow.showAtLocation(this.findViewById(R.id.statistics_recyclerView), Gravity.CENTER_VERTICAL, 0, 0);
         sameItemPopWindow.setOutsideTouchable(true);
+        TextView same_item_total_money = (TextView) view.findViewById(R.id.same_item_total_money);
         TextView same_item_title = (TextView) view.findViewById(R.id.same_item_title);
         ImageView same_item_icon = (ImageView) view.findViewById(R.id.same_item_icon);
+        ImageView btn_same_item_close = (ImageView) view.findViewById(R.id.btn_same_item_close);
+        btn_same_item_close.setOnClickListener(this);
         RecyclerView same_item_recyclerView = (RecyclerView) view.findViewById(R.id.same_item_recyclerView);
         LinearLayout delete_btn_layout = (LinearLayout) view.findViewById(R.id.delete_btn_layout);
         RelativeLayout delete_null_layout = (RelativeLayout) view.findViewById(R.id.delete_null_layout);
         String classify_title = same_classify_data.get(position).get("classify_title").toString();
         int classify_num = Integer.valueOf(same_classify_data.get(position).get("classify_num").toString());
         ArrayList<Map<String, Object>> sameArrayList = Constant.getSameClassifyData(this, data, classify_num);
+        same_item_total_money.setText("("+get_money_data[position]+")");
         same_item_title.setText(classify_title);
         same_item_icon.setImageResource(Constant.changeDrawableArray(this, R.array.classify_exp_icon_selected)[classify_num]);
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -300,6 +321,18 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
             case R.id.statistics_date_tv:
                 showChooseDate();
                 break;
+            case R.id.btn_same_item_close:
+                sameItemPopWindow.dismiss();
+                break;
+            case R.id.statistics_exp_tv:
+                expORincome = "0";
+                drawPieChart(expORincome);
+                break;
+            case R.id.statistics_income_tv:
+                expORincome = "1";
+                drawPieChart(expORincome);
+                break;
+
         }
     }
 

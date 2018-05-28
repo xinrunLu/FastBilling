@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPreferencesData {
+
     /**
      * 保存登陆状态
      **/
@@ -43,6 +44,22 @@ public class SharedPreferencesData {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MySetting", Activity.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "no_username");
         return username;
+    }
+
+    /**
+     * 保存预算
+     **/
+    public static void save_budget(Context context, String value){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MySetting", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("budget",value);
+        editor.commit();
+    }
+
+    public static String get_budget(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MySetting", Activity.MODE_PRIVATE);
+        String budget = sharedPreferences.getString("budget", "10000");
+        return budget;
     }
 
 

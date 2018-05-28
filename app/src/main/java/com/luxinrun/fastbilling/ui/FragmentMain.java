@@ -67,6 +67,7 @@ public class FragmentMain extends Activity implements View.OnClickListener {
             MyUser user = BmobUser.getCurrentUser(MyUser.class);
             if (user != null) {
                 Log.d("lxr","账号登陆模式="+login_state);
+
             } else {
                 Log.d("lxr","缓存对象为空");
             }

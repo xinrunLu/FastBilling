@@ -24,6 +24,9 @@ public class Constant {
     public static String STATE_VISITOR = "1";
     public static String STATE_FIRST = "2";
 
+    public static final int to_Login = 0;
+    public static final int LOGIN_SUCCESS = 1;
+
     /**
      * 根据array数组的id图片返回int[]
      *

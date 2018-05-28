@@ -99,6 +99,11 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                         Toast.makeText(LoginActivity.this,R.string.success_login_cn,Toast.LENGTH_SHORT).show();
                         //登陆成功，保存为登陆状态
                         SharedPreferencesData.save_login_state(LoginActivity.this, Constant.STATE_LOGIN);
+                        SharedPreferencesData.save_username(LoginActivity.this, username);
+                        Intent intent = new Intent();
+                        intent.putExtra("username",username);
+                        intent.putExtra("password",password);
+                        LoginActivity.this.setResult(Constant.LOGIN_SUCCESS, intent);
                         LoginActivity.this.finish();
                     }else {
                         Toast.makeText(LoginActivity.this,R.string.failed_login_cn,Toast.LENGTH_SHORT).show();
