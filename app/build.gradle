@@ -4,7 +4,7 @@ apply plugin: 'com.mob.sdk'
 MobSDK {
     appKey "260f0b02b29a4"
     appSecret "519f45d3af35809564344175476673ad"
-
+    SMSSDK {}
     ShareSDK {
         //平台配置信息
         devInfo {

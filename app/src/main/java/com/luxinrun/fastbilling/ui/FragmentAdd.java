@@ -37,10 +37,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import cn.bmob.v3.BmobUser;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
 
 public class FragmentAdd extends Fragment implements View.OnClickListener {
 
@@ -349,8 +353,6 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
         // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl("http://sharesdk.cn");
-        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite(getString(R.string.app_name));
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
@@ -375,6 +377,29 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+    public void sendCode(Context context) {
+        RegisterPage page = new RegisterPage();
+        //如果使用我们的ui，没有申请模板编号的情况下需传null
+        page.setTempCode(null);
+        page.setRegisterCallback(new EventHandler() {
+            public void afterEvent(int event, int result, Object data) {
+                if (result == SMSSDK.RESULT_COMPLETE) {
+                    // 处理成功的结果
+                    HashMap<String,Object> phoneMap = (HashMap<String, Object>) data;
+                    String country = (String) phoneMap.get("country"); // 国家代码，如“86”
+                    String phone = (String) phoneMap.get("phone"); // 手机号码，如“13800138000”
+                    // TODO 利用国家代码和手机号码进行后续的操作
+                    Log.d("lxr","SMS is right!");
+                } else{
+                    // TODO 处理错误的结果
+                    Log.d("lxr","SMS is error!");
+                }
+            }
+        });
+        page.show(context);
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -415,6 +440,7 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
                 showShare();
                 break;
             case R.id.layout_about:
+                sendCode(getActivity());
                 pop_personal_window.dismiss();
                 break;
             case R.id.layout_feedback:

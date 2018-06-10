@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luxinrun.fastbilling.assistent.MyUser;
@@ -20,6 +21,8 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
 
 /**
  * A login screen that offers login via email/password.
@@ -28,17 +31,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     // UI references.
-    private EditText edit_register_username;
-    private EditText edit_register_email;
-    private EditText edit_register_password;
+    private EditText edit_register_phone;
+    private EditText edit_register_sms;
+    private TextView btn_get_sms;
     private Button btn_finish_register;
     private ImageButton ivBtn_register_exit;
 
     //注册的三要素
     private String username;
-    private String email;
     private String password;
     private boolean IS_EXIST;
+    private boolean IS_GET_SMS;
 
 
     @Override
@@ -46,9 +49,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        edit_register_username = (EditText) findViewById(R.id.edit_register_username);
-        edit_register_email = (EditText) findViewById(R.id.edit_register_email);
-        edit_register_password = (EditText) findViewById(R.id.edit_register_password);
+        edit_register_phone = (EditText) findViewById(R.id.edit_register_phone);
+        edit_register_sms = (EditText) findViewById(R.id.edit_register_sms);
+        btn_get_sms = (TextView) findViewById(R.id.btn_get_sms);
+        btn_get_sms.setOnClickListener(this);
 
         btn_finish_register = (Button) findViewById(R.id.btn_finish_register);
         btn_finish_register.setOnClickListener(this);
@@ -60,6 +64,66 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     }
+
+    // 请求验证码，其中country表示国家代码，如“86”；phone表示手机号码，如“13800138000”
+    public void sendCode(String country, String phone) {
+
+        // 注册一个事件回调，用于处理发送验证码操作的结果
+        SMSSDK.registerEventHandler(new EventHandler() {
+            public void afterEvent(int event, int result, Object data) {
+                if (result == SMSSDK.RESULT_COMPLETE) {
+                    // TODO 处理成功得到验证码的结果
+                    // 请注意，此时只是完成了发送验证码的请求，验证码短信还需要几秒钟之后才送达
+                    IS_GET_SMS = true;
+                } else{
+                    // TODO 处理错误的结果
+                    IS_GET_SMS = false;
+                }
+
+            }
+        });
+        // 触发操作
+        SMSSDK.getVerificationCode(country, phone);
+    }
+
+    // 提交验证码，其中的code表示验证码，如“1357”
+    public void submitCode(String country, String phone, String code) {
+        // 注册一个事件回调，用于处理提交验证码操作的结果
+        SMSSDK.registerEventHandler(new EventHandler() {
+            public void afterEvent(int event, int result, Object data) {
+                if (result == SMSSDK.RESULT_COMPLETE) {
+                    // TODO 处理验证成功的结果
+                    MyUser user = new MyUser();
+                    user.setUsername(username);
+                    user.setPassword("888888");
+                    user.signUp(new SaveListener<MyUser>() {
+                        @Override
+                        public void done(MyUser myUser, BmobException e) {
+                            if (e == null) {
+                                Toast.makeText(RegisterActivity.this,R.string.success_register,Toast.LENGTH_SHORT).show();
+                                RegisterActivity.this.finish();
+                            } else {
+                                Toast.makeText(RegisterActivity.this,R.string.failed_register,Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else{
+                    // TODO 处理错误的结果
+                    Log.d("lxr","短信验证失败！");
+                }
+
+            }
+        });
+        // 触发操作
+        SMSSDK.submitVerificationCode(country, phone, code);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        //用完回调要注销掉，否则可能会出现内存泄露
+        SMSSDK.unregisterAllEventHandler();
+    };
+
 
     /**
      * 检查输入的用户名，邮箱是否已经注册过
@@ -93,7 +157,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private boolean isUsernameValid(String username) {
-        return username.length() > 4 ;
+        return username.length() == 11 ;
     }
 
 
@@ -107,49 +171,61 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return password.length() > 4;
     }
 
-    private void regeister_account() {
+    private void get_phone_sms() {
         // 重置错误信息为空
-        edit_register_username.setError(null);
-        edit_register_email.setError(null);
-        edit_register_password.setError(null);
+        edit_register_phone.setError(null);
 
-        // 获取用户输入的用户名，邮箱，密码
-        username = edit_register_username.getText().toString();
-        email = edit_register_email.getText().toString();
-        password = edit_register_password.getText().toString();
+        // 获取用户输入的手机号
+        username = edit_register_phone.getText().toString();
+        password = "888888";
         boolean cancel = false;
         View focusView = null;
 
         // 检查用户名
         if (TextUtils.isEmpty(username)) {
-            edit_register_username.setError(getString(R.string.error_field_required));
-            focusView = edit_register_username;
+            edit_register_phone.setError(getString(R.string.error_field_required));
+            focusView = edit_register_phone;
             cancel = true;
         }else if (!isUsernameValid(username)){
-            edit_register_username.setError(getString(R.string.error_invalid_username));
-            focusView = edit_register_username;
+            edit_register_phone.setError(getString(R.string.error_invalid_username));
+            focusView = edit_register_phone;
             cancel = true;
         }else if (isExist("username",username)) {
-            edit_register_username.setError(getString(R.string.error_exist_username));
-            focusView = edit_register_username;
+            edit_register_phone.setError(getString(R.string.error_exist_username));
+            focusView = edit_register_phone;
             cancel = true;
         }
 
-        // 检查密码
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            edit_register_password.setError(getString(R.string.error_invalid_password));
-            focusView = edit_register_password;
-            cancel = true;
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            //获取验证码
+            sendCode("86",username);
         }
+    }
 
-        // 检查邮箱
-        if (TextUtils.isEmpty(email)) {
-            edit_register_email.setError(getString(R.string.error_field_required));
-            focusView = edit_register_email;
+    private void register_account() {
+        // 重置错误信息为空
+        edit_register_phone.setError(null);
+
+        // 获取用户输入的手机号
+        username = edit_register_phone.getText().toString();
+        password = "888888";
+        boolean cancel = false;
+        View focusView = null;
+
+        // 检查用户名
+        if (TextUtils.isEmpty(username)) {
+            edit_register_phone.setError(getString(R.string.error_field_required));
+            focusView = edit_register_phone;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            edit_register_email.setError(getString(R.string.error_invalid_email));
-            focusView = edit_register_email;
+        }else if (!isUsernameValid(username)){
+            edit_register_phone.setError(getString(R.string.error_invalid_username));
+            focusView = edit_register_phone;
+            cancel = true;
+        }else if (isExist("username",username)) {
+            edit_register_phone.setError(getString(R.string.error_exist_username));
+            focusView = edit_register_phone;
             cancel = true;
         }
 
@@ -160,7 +236,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             MyUser user = new MyUser();
             user.setUsername(username);
             user.setPassword(password);
-            user.setEmail(email);
             user.signUp(new SaveListener<MyUser>() {
                 @Override
                 public void done(MyUser myUser, BmobException e) {
@@ -178,8 +253,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.btn_get_sms:
+                get_phone_sms();
+                break;
             case R.id.btn_finish_register:
-                regeister_account();
+                if (IS_GET_SMS){
+                    submitCode("86",username,edit_register_sms.getText().toString());
+                }else {
+                    Log.d("lxr","注册账号 失败！");
+                }
                 break;
             case R.id.ivBtn_register_exit:
                 this.finish();

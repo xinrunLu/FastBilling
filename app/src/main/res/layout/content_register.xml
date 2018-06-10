@@ -22,17 +22,16 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
                 android:layout_gravity="center"
+                android:layout_margin="16dp"
                 android:src="@drawable/app_icon_welcome" />
 
 
             <ImageButton
-                android:background="@drawable/btn_back_selector"
                 android:id="@+id/ivBtn_register_exit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:background="@drawable/btn_back_selector" />
         </android.support.v7.widget.Toolbar>
 
 
@@ -59,7 +58,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="28sp" />
 
-            <!-- 填写用户名 -->
+            <!-- 填写手机号 -->
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -72,16 +71,15 @@
 
                     <EditText
 
-                        android:id="@+id/edit_register_username"
+                        android:id="@+id/edit_register_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:hint="@string/edit_hint_username"
+                        android:hint="@string/edit_hint_phone_num"
                         android:imeOptions="actionNext"
-                        android:inputType="text"
-                        android:maxLength="16"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textColor="#FFFFFF"
@@ -89,13 +87,6 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-
-                <ImageView
-                    android:id="@+id/flag_same_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
             </RelativeLayout>
 
             <View
@@ -104,7 +95,7 @@
                 android:layout_marginTop="5dip"
                 android:background="#FFFFFF" />
 
-            <!-- 填写邮件 -->
+            <!-- 获取验证码 -->
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -117,12 +108,12 @@
                     android:textColorHint="#FFFFFF">
 
                     <EditText
-                        android:id="@+id/edit_register_email"
+                        android:id="@+id/edit_register_sms"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:hint="@string/edit_hint_email"
+                        android:hint="@string/edit_hint_sms"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:maxLength="30"
@@ -133,12 +124,22 @@
                 </android.support.design.widget.TextInputLayout>
 
 
-                <ImageView
-                    android:id="@+id/flag_email"
+                <TextView
+                    android:id="@+id/btn_get_sms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/btn_visitor_selector"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="8dp"
+                    android:text="@string/get_sms"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <View
@@ -146,42 +147,7 @@
                 android:layout_height="1dip"
                 android:layout_marginTop="5dip"
                 android:background="#FFFFFF" />
-            <!-- 填写密码 -->
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dip">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="#FFFFFF">
-
-                    <EditText
-                        android:id="@+id/edit_register_password"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center_vertical"
-                        android:background="@null"
-                        android:hint="@string/edit_hint_password"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
-                        android:maxLength="18"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
-                </android.support.design.widget.TextInputLayout>
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:layout_marginTop="5dip"
-                android:background="#FFFFFF" />
 
             <Button
                 android:id="@+id/btn_finish_register"
